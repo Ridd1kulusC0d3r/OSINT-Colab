@@ -5,8 +5,8 @@
 | Fase | O que a IA faz no OSINTIA | O que continua humano |
 |---|---|---|
 | Planejamento | Nada | Pergunta de inteligência, escopo, base legal |
-| Coleta | Nada (o OSINTIA não coleta) | Escolha das fontes, registro da coleta |
-| Processamento | GLiNER extrai entidades; e5 agrupa contas; visão descreve pistas | Conferir extrações e pistas |
+| Coleta | Notebook 07 gera variantes e consulta crt.sh, Wayback, Maigret e Holehe | Escolha das fontes, base legal, registro da coleta |
+| Processamento | GLiNER extrai entidades; e5 e o 09 agrupam contas; visão e GeoCLIP localizam imagens | Conferir extrações, grupos e coordenadas |
 | Análise | Modelo de decisão tria; DeepSeek-R1 preenche ACH | Decidir casos abaixo do limiar, julgar hipóteses |
 | Disseminação | Mascaramento LGPD; manifesto de custódia | Assinar o relatório e responder por ele |
 
@@ -28,6 +28,9 @@ Combine a confiabilidade da fonte (A–F) com a credibilidade da informação (1
 - **Finalidade legítima.** Use para proteção de marca, resposta a incidentes, pesquisa e investigação autorizada. Não use para perseguir, expor ou assediar pessoas.
 - **Minimização.** Colete e guarde só o necessário. `extracao.mascarar` remove CPF, CNPJ, telefone e e-mail de relatórios compartilhados.
 - **Pessoas privadas.** Evite construir perfis de indivíduos sem base legal. O caso de demonstração é sobre uma **marca** fictícia e contas que a imitam.
+- **Coordenação não é autoria.** O notebook 09 aponta contas que agem juntas; quem está por trás é uma conclusão humana, com evidência independente. Imprensa, campanhas e movimentos sociais também coordenam.
+- **Biometria fica de fora.** Reconhecimento facial trata dado biométrico (LGPD, art. 5º, II, e art. 11). O OSINTIA não inclui esse tipo de notebook.
+- **Coleta com moderação.** `osintia.coleta` espera 1,5 s entre requisições e se identifica com User-Agent próprio. Respeite os termos de uso de cada serviço.
 - **Dados sensíveis.** Saúde, religião, orientação sexual e similares exigem base legal específica (LGPD, art. 11). Não treine modelos com esse tipo de dado sem ela.
 - **Transparência.** Registre no relatório quais modelos foram usados, com que versão e com que limiar.
 

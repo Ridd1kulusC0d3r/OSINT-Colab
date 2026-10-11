@@ -12,6 +12,18 @@ Verifique sempre a licença no cartão do modelo antes de uso comercial ou em in
 | `urchade/gliner_multi_pii-v1` | 02 (alternativa) | NER de dados pessoais | ~0,2B | CPU | Sim | Afinado para PII |
 | `intfloat/multilingual-e5-base` | 04 | Embeddings de sentença | ~0,3B | CPU | Sim | Exige prefixo `query: ` ou `passage: ` |
 | `Qwen/Qwen2.5-1.5B-Instruct` | 06 | LLM de chat | 1,5B | ~3 GB | Sim | Linha de base *zero-shot* |
+| `geoclip` (GeoCLIP, NeurIPS 2023) | 08 | Geolocalização imagem → GPS (contrastivo, estilo CLIP) | encoder CLIP + encoder de localização | T4 ou CPU | — | Devolve top-k coordenadas; a probabilidade é relativa à galeria e não vem calibrada |
+| `geolocal/StreetCLIP` | 08 (opcional) | Zero-shot país/cidade entre candidatos | base `clip-vit-large-patch14-336` | T4 ou CPU | — | **CC BY-NC 4.0**; viés ocidental; sem Índia e China; imagens privadas fora de escopo |
+
+## Ferramentas de coleta (sem IA)
+
+| Ferramenta | Notebook | O que faz | Licença |
+|---|---|---|---|
+| crt.sh | 07 | Busca em logs de Certificate Transparency (stdlib, `osintia.coleta`) | serviço público |
+| Wayback Machine CDX | 07 | Capturas históricas; extração de IDs de analytics (stdlib) | serviço público |
+| [Maigret](https://github.com/soxoj/maigret) | 07 | Perfis públicos por username em milhares de sites | MIT |
+| [Holehe](https://github.com/megadose/holehe) | 07 (opcional) | Serviços onde um e-mail tem conta | GPL-3.0 |
+| [coordination-network-toolkit](https://pypi.org/project/coordination-network-toolkit) | 09 (opcional) | Redes de coordenação; o método está reimplementado em `osintia.coordenacao` | MIT |
 
 ## No radar (não usados ainda)
 
@@ -24,4 +36,6 @@ Verifique sempre a licença no cartão do modelo antes de uso comercial ou em in
 | Dataset | Uso | Tamanho | Licença | Cuidado |
 |---|---|---|---|---|
 | `LocalLLaMA/typed-decisions` | Notebook 01 (opcional, subconjunto `security_incidents`) | 1,6 mil linhas, 4 domínios | Apache-2.0 | Gold gerado por modelo; veja `AUDITORIA-DE-ROTULOS.md` |
-| `dados/demo/triagem_perfis.jsonl` | Todos | 400 linhas | MIT | Sintético e fictício |
+| `dados/demo/triagem_perfis.jsonl` | 00, 01, 04, 06 | 400 linhas | MIT | Sintético e fictício |
+| `dados/demo/campanha_coordenada.csv` | 09 | 301 mensagens, 81 contas | MIT | Sintético; inclui a armadilha da imprensa |
+| `dados/demo/geo_previsoes.jsonl` | 08 | 240 previsões top-5 | MIT | Sintético; geolocalizador superconfiante |

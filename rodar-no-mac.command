@@ -5,4 +5,5 @@ PY=$(command -v python3 || command -v python)
 if [ -z "$PY" ]; then echo "Python 3 não encontrado. Instale em https://www.python.org/downloads/"; read -r -p "Enter para sair"; exit 1; fi
 echo "== Testes do núcleo =="; "$PY" -m unittest discover -s testes
 echo; echo "== Auditoria do caso de demonstração =="; "$PY" -m osintia auditar dados/demo/triagem_perfis.jsonl
+echo; echo "== Coordenação no caso de demonstração =="; "$PY" -m osintia coordenacao dados/demo/campanha_coordenada.csv
 echo; read -r -p "Pronto. Pressione Enter para fechar."

@@ -10,4 +10,7 @@ echo.
 echo == Auditoria do caso de demonstracao ==
 %PY% -m osintia auditar dados/demo/triagem_perfis.jsonl
 echo.
+echo == Coordenacao no caso de demonstracao ==
+%PY% -m osintia coordenacao dados/demo/campanha_coordenada.csv
+echo.
 pause

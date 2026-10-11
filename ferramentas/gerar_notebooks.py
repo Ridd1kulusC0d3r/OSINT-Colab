@@ -42,7 +42,7 @@ SETUP_REPO = """# Baixa o OSINTIA (núcleo em Python puro: calibração, auditor
 !git clone -q https://github.com/Ridd1kulusC0d3r/OSINTIA.git /content/OSINTIA 2>/dev/null || git -C /content/OSINTIA pull -q
 import sys
 sys.path.insert(0, "/content/OSINTIA")
-from osintia import auditoria, calibracao, custodia, dados, esquemas, extracao, roteamento
+from osintia import auditoria, calibracao, coleta, coordenacao, custodia, dados, esquemas, extracao, geo, roteamento
 print("OSINTIA pronto")"""
 
 INSTALA_UNSLOTH = """%%capture
@@ -68,6 +68,7 @@ RODAPE = """---
 ### Próximos passos
 - `docs/ENGENHARIA-REVERSA.md` explica como cada peça foi reconstruída.
 - `docs/AUDITORIA-DE-ROTULOS.md` mostra por que acurácia alta pode esconder erro herdado.
+- `docs/COLABS-RELACIONADOS.md` lista outros notebooks de OSINT (Bellingcat e comunidade) que combinam com este.
 - Abra uma *issue* no repositório se algo quebrar no Colab: as bibliotecas de IA mudam rápido.
 
 *OSINTIA · Deivison Lourenço · MIT*"""
@@ -649,7 +650,264 @@ custodia.registrar("/content/saidas/manifesto.jsonl", "decisao_zero_shot", "/con
     ("md", RODAPE),
 ])
 
-NOTEBOOKS = [NB00, NB01, NB02, NB03, NB04, NB05, NB06]
+# ---------------------------------------------------------------- 07 coleta
+NB07 = ("07_coleta_fontes_abertas.ipynb", False, [
+    ("md", cabecalho("07_coleta_fontes_abertas.ipynb", "07 · Coleta em fontes abertas para alimentar a IA",
+        "O elo que faltava: **coletar** antes de analisar. Partindo de uma marca ou username, este notebook gera variantes de imitação, procura domínios em certificados públicos (**crt.sh**), monta a linha do tempo de **IDs de analytics** no Wayback Machine (técnica da Bellingcat) e verifica contas com **Maigret** e **Holehe**. A saída já sai no formato dos notebooks 01 (triagem) e 04 (vínculos).",
+        False, "5 a 20 minutos (depende das fontes)")),
+    ("md", "> ⚠️ **Antes de rodar com um alvo real:** confirme a finalidade legítima (proteção de marca, resposta a incidente, investigação autorizada). Prefira alvos **institucionais** (marcas, domínios). Para pessoas físicas, registre a base legal (LGPD) no manifesto. Holehe consulta serviços com o e-mail informado: use só com e-mails sob sua responsabilidade ou com autorização."),
+    ("code", SETUP_REPO),
+    ("md", "## 0. Defina o alvo\nO padrão usa o caso fictício. Troque pelos dados do seu caso."),
+    ("code", """MARCA         = "bancoaurora"                     # username oficial / nome da marca
+TERMO_CRTSH   = "%aurora%"                        # % é curinga no crt.sh
+SITE_OFICIAL  = "aurora.example"                  # domínio oficial (para comparar analytics)
+SUSPEITOS     = []                                # domínios suspeitos já conhecidos (opcional)
+EMAIL         = ""                                # e-mail sob sua responsabilidade (opcional, para o Holehe)
+MAX_VARIANTES_MAIGRET = 15                        # Maigret é lento: comece com poucas variantes
+BASE_LEGAL    = "proteção de marca - contrato com o cliente"
+
+import os, json
+os.makedirs("/content/saidas", exist_ok=True)
+MANIFESTO = "/content/saidas/manifesto.jsonl"
+custodia.registrar(MANIFESTO, "inicio_coleta", detalhes={"marca": MARCA, "base_legal": BASE_LEGAL})"""),
+    ("md", "## 1. Variantes de imitação (lógica do SÓSIA)\nHomóglifos (`o→0`), letra dobrada ou omitida, letras trocadas, separadores e sufixos típicos de golpe (`_oficial`, `_sac`, `_suporte`)."),
+    ("code", """vars_ = coleta.variantes(MARCA)
+print(len(vars_), "variantes. Primeiras 25:")
+print(vars_[:25])"""),
+    ("md", "## 2. Domínios em certificados públicos (crt.sh)\nTodo certificado HTTPS emitido vai para logs públicos de *Certificate Transparency*. Um domínio imitador costuma aparecer aqui **antes** de o golpe ir ao ar."),
+    ("code", """try:
+    certs = coleta.crtsh(TERMO_CRTSH)
+except Exception as e:
+    certs = []
+    print("crt.sh indisponível agora (é comum ficar lento). Tente de novo em alguns minutos:", type(e).__name__)
+
+oficiais = {SITE_OFICIAL, "www." + SITE_OFICIAL}
+suspeitos_ct = sorted({c["dominio"] for c in certs if c["dominio"] not in oficiais and not c["dominio"].endswith("." + SITE_OFICIAL)})
+print(len(certs), "domínios em certificados;", len(suspeitos_ct), "fora do domínio oficial")
+for c in sorted(certs, key=lambda c: c["inicio"], reverse=True)[:15]:
+    print(c["inicio"][:10], c["dominio"], "|", c["emissor"][:40])
+
+with open("/content/saidas/crtsh.json", "w", encoding="utf-8") as f:
+    json.dump(certs, f, ensure_ascii=False, indent=1)
+custodia.registrar(MANIFESTO, "coleta_crtsh", "/content/saidas/crtsh.json", {"termo": TERMO_CRTSH})"""),
+    ("md", "## 3. IDs de analytics no Wayback Machine\nSites do mesmo dono costumam reaproveitar o mesmo ID (`UA-`, `G-`, `GTM-`, pixel do Facebook, AdSense). Um ID igual entre um site de golpe e outro site é um **vínculo de infraestrutura**: pista forte, mas não prova de autoria."),
+    ("code", """alvos = [SITE_OFICIAL] + list(SUSPEITOS) + suspeitos_ct[:5]
+historicos = {}
+for site in alvos:
+    try:
+        historicos[site] = coleta.historico_analytics(site, max_capturas=8, de="2018")
+        ids = {i for cap in historicos[site] for t, v in cap["ids"].items() if t != "erro" for i in v}
+        print(f"{site}: {len(historicos[site])} capturas, IDs: {sorted(ids) or '-'}")
+    except Exception as e:
+        print(f"{site}: sem capturas ({type(e).__name__})")
+
+compartilhados = coleta.ids_compartilhados(historicos)
+print("\\nIDs em mais de um site:", compartilhados or "nenhum")
+with open("/content/saidas/analytics.json", "w", encoding="utf-8") as f:
+    json.dump({"historicos": historicos, "compartilhados": compartilhados}, f, ensure_ascii=False, indent=1)
+custodia.registrar(MANIFESTO, "coleta_wayback_analytics", "/content/saidas/analytics.json")"""),
+    ("md", "## 4. Contas com Maigret\nO Maigret procura um username em milhares de sites e devolve só **perfis públicos que existem**. Aqui testamos o username oficial e as variantes mais próximas. Ferramenta da comunidade (MIT), o mesmo uso do notebook da Bellingcat."),
+    ("code", "!pip install -q maigret"),
+    ("code", """import glob, subprocess
+usernames = [MARCA] + vars_[:MAX_VARIANTES_MAIGRET]
+pasta = "/content/saidas/maigret"
+os.makedirs(pasta, exist_ok=True)
+subprocess.run(["maigret", *usernames, "--json", "ndjson", "--folderoutput", pasta, "--timeout", "15", "--no-progressbar"],
+               check=False)
+
+perfis = []
+for arq in glob.glob(f"{pasta}/*.json"):
+    for reg in coleta.ler_ndjson(arq):
+        perfis.append({"username": reg.get("username"), "site": reg.get("sitename"),
+                       "url": reg.get("url_user"), "arquivo": os.path.basename(arq)})
+print(len(perfis), "perfis encontrados")
+for p in perfis[:20]:
+    print(p["username"], "|", p["site"], "|", p["url"])"""),
+    ("md", "## 5. (Opcional) E-mail com Holehe\nSó roda se `EMAIL` estiver preenchido."),
+    ("code", """if EMAIL:
+    !pip install -q holehe
+    !cd /content/saidas && holehe --only-used --csv {EMAIL}
+    custodia.registrar(MANIFESTO, "coleta_holehe", detalhes={"email": "[mascarado]"})
+else:
+    print("EMAIL vazio: etapa pulada")"""),
+    ("md", "## 6. Entregar para a IA\nCada perfil vira um `state` no mesmo formato da triagem (notebook 01). A similaridade com o username oficial entra como contexto. Campos que a coleta não traz (seguidores, idade da conta) ficam como *desconhecido*: preencha à mão nos casos que for escalar."),
+    ("code", """from difflib import SequenceMatcher
+estados = []
+for i, p in enumerate(perfis):
+    sim = SequenceMatcher(None, MARCA, (p["username"] or "").lower()).ratio()
+    estados.append({
+        "id": f"coleta_{i:04d}",
+        "state": "\\n".join([
+            f"Alvo monitorado: @{MARCA}",
+            f"Perfil analisado: @{p['username']} ({p['site']})",
+            f"URL: {p['url']}",
+            f"Similaridade com o username oficial: {sim:.2f}",
+            "Selo de verificado: desconhecido",
+            "Seguidores: desconhecido",
+        ]),
+        "fonte": p["url"],
+    })
+dados.salvar_jsonl(estados, "/content/saidas/para_triagem.jsonl")
+custodia.registrar(MANIFESTO, "entrega_para_triagem", "/content/saidas/para_triagem.jsonl", {"n": len(estados)})
+print(len(estados), "perfis prontos para o notebook 01 em /content/saidas/para_triagem.jsonl")
+print("Cadeia de custódia:", custodia.verificar(MANIFESTO) or "íntegra")"""),
+    ("md", "### Leitura\n- **Existir não é imitar.** Maigret acha perfis com o mesmo nome; quem decide se é imitação é a triagem (01) e o analista.\n- **crt.sh pode trazer domínios legítimos** de parceiros e subsidiárias. Confira o dono antes de pedir remoção.\n- **ID de analytics compartilhado** é vínculo de infraestrutura. Combine com WHOIS, hospedagem e conteúdo antes de concluir."),
+    ("md", RODAPE),
+])
+
+# ---------------------------------------------------------------- 08 GeoCLIP
+NB08 = ("08_geoclip_geolocalizacao_auditada.ipynb", True, [
+    ("md", cabecalho("08_geoclip_geolocalizacao_auditada.ipynb", "08 · Geolocalização com GeoCLIP, auditada em quilômetros",
+        "O **GeoCLIP** (NeurIPS 2023) devolve as 5 coordenadas mais prováveis de uma foto, com probabilidade. O OSINTIA mede se essa probabilidade é honesta **em distância**: quantas vezes a previsão cai a menos de 25 km (cidade), 200 km (região) e 750 km (país). A verdade vem do **GPS no EXIF das suas próprias fotos originais**, então você audita o modelo no seu tipo de imagem antes de usá-lo num caso.",
+        True, "10 minutos (funciona em CPU, mais devagar)")),
+    ("code", "!pip install -q geoclip"),
+    ("code", SETUP_REPO),
+    ("md", "## Parte A · A auditoria, sem GPU\nPrevisões **simuladas** de um geolocalizador superconfiante sobre 240 fotos fictícias em capitais brasileiras. Ele diz 50% a 80% de certeza até em fotos de natureza e interiores."),
+    ("code", """sim = dados.carregar_jsonl("/content/OSINTIA/dados/demo/geo_previsoes.jsonl")
+prev = [tuple(x["topk"][0]) for x in sim]
+verd = [tuple(x["verdade"]) for x in sim]
+conf = [x["probs"][0] for x in sim]
+
+print("acurácia por distância:", geo.acuracia_por_distancia(prev, verd))
+cal = geo.calibracao_distancia(conf, prev, verd, raio_km=25)
+print(f"\\nECE no raio de cidade (25 km): {cal['ece']}")
+for linha in cal["tabela"]:
+    print(linha)"""),
+    ("md", "Por tipo de cena: onde o modelo merece confiança?"),
+    ("code", """from collections import defaultdict
+por_cena = defaultdict(list)
+for x, p, v in zip(sim, prev, verd):
+    por_cena[x["cena"]].append(geo.haversine_km(p, v) <= 25)
+for cena, acertos in sorted(por_cena.items(), key=lambda kv: -sum(kv[1]) / len(kv[1])):
+    print(f"{cena:<14} acerto em 25 km: {sum(acertos) / len(acertos):.0%}  (n={len(acertos)})")"""),
+    ("md", "**Sinal independente da probabilidade:** se as 5 previsões estão espalhadas, o modelo não sabe, mesmo que o top-1 diga 80%."),
+    ("code", """estaveis = [geo.concordancia_topk([tuple(t) for t in x["topk"]], raio_km=200)["estavel"] for x in sim]
+acerto = [geo.haversine_km(p, v) <= 25 for p, v in zip(prev, verd)]
+for flag in (True, False):
+    sel = [a for a, e in zip(acerto, estaveis) if e == flag]
+    print(f"top-5 {'estável ' if flag else 'disperso'}: {len(sel):>3} fotos, acerto em 25 km = {sum(sel) / len(sel):.0%}")"""),
+    ("md", "## Parte B · GeoCLIP de verdade\nEnvie **fotos originais suas, com GPS** (do celular, sem passar por redes sociais, que apagam o EXIF). Fotos sem GPS também funcionam, mas entram só como previsão, sem auditoria."),
+    ("code", """import torch
+from geoclip import GeoCLIP
+modelo = GeoCLIP()
+if torch.cuda.is_available():
+    modelo = modelo.to("cuda")"""),
+    ("code", """from google.colab import files
+from PIL import Image
+enviados = list(files.upload())
+print(len(enviados), "arquivos")"""),
+    ("code", """def gps_da_foto(caminho):
+    exif = Image.open(caminho).getexif()
+    g = exif.get_ifd(0x8825) if exif else {}
+    if 2 in g and 4 in g:
+        return (geo.gps_exif_para_graus(g[2], g.get(1, "N")), geo.gps_exif_para_graus(g[4], g.get(3, "E")))
+    return None
+
+resultados = []
+for arq in enviados:
+    gps, prob = modelo.predict(arq, top_k=5)
+    topk = [tuple(map(float, p)) for p in gps.tolist()]
+    resultados.append({"arquivo": arq, "topk": topk, "probs": [float(x) for x in prob.tolist()],
+                       "verdade": gps_da_foto(arq)})
+    r = resultados[-1]
+    extra = f" | erro: {geo.haversine_km(topk[0], r['verdade']):.1f} km" if r["verdade"] else " | sem GPS no EXIF"
+    print(f"{arq}: top-1 {topk[0][0]:.4f}, {topk[0][1]:.4f} (p={r['probs'][0]:.3f}){extra}")"""),
+    ("code", """com_gps = [r for r in resultados if r["verdade"]]
+if len(com_gps) >= 5:
+    p = [r["topk"][0] for r in com_gps]; v = [r["verdade"] for r in com_gps]; c = [r["probs"][0] for r in com_gps]
+    print("acurácia nas suas fotos:", geo.acuracia_por_distancia(p, v))
+    print("calibração (750 km):", geo.calibracao_distancia(c, p, v, raio_km=750))
+else:
+    print(f"{len(com_gps)} foto(s) com GPS: envie pelo menos 5 para uma auditoria com algum significado (30+ é o ideal).")"""),
+    ("md", "## Parte C · Mapa e custódia\nO KML abre no Google Earth: pontos vermelhos são previsões, verdes são o GPS real."),
+    ("code", """import json, os
+os.makedirs("/content/saidas", exist_ok=True)
+pontos = []
+for r in resultados:
+    for k, (lat, lon) in enumerate(r["topk"]):
+        pontos.append({"nome": f"{r['arquivo']} #{k + 1}", "lat": lat, "lon": lon, "descricao": f"p={r['probs'][k]:.3f}"})
+    if r["verdade"]:
+        pontos.append({"nome": f"{r['arquivo']} GPS real", "lat": r["verdade"][0], "lon": r["verdade"][1]})
+geo.kml_pontos(pontos, "/content/saidas/geoclip.kml", nome="OSINTIA GeoCLIP")
+with open("/content/saidas/geoclip.json", "w", encoding="utf-8") as f:
+    json.dump(resultados, f, ensure_ascii=False, indent=1)
+for r in resultados:
+    custodia.registrar("/content/saidas/manifesto.jsonl", "coleta_imagem", r["arquivo"])
+custodia.registrar("/content/saidas/manifesto.jsonl", "geolocalizacao_geoclip", "/content/saidas/geoclip.json")
+print("KML e JSON em /content/saidas/")"""),
+    ("md", "## (Opcional) StreetCLIP: país ou cidade entre candidatos\nZero-shot entre opções que **você** define. Atenção à licença **CC BY-NC 4.0** (não comercial) e ao aviso do autor: geolocalizar imagens privadas de pessoas está fora do uso pretendido."),
+    ("code", """USAR_STREETCLIP = False
+CANDIDATOS = ["Belo Horizonte", "São Paulo", "Rio de Janeiro", "Recife", "Salvador", "Porto Alegre", "Curitiba", "Manaus"]
+if USAR_STREETCLIP:
+    from transformers import pipeline
+    clf = pipeline("zero-shot-image-classification", model="geolocal/StreetCLIP")
+    for arq in enviados:
+        top = clf(Image.open(arq), candidate_labels=CANDIDATOS)[:3]
+        print(arq, [(t["label"], round(t["score"], 3)) for t in top])"""),
+    ("md", "### Leitura\n- A probabilidade do GeoCLIP é **relativa** a uma galeria de coordenadas; ela não vem calibrada. Por isso a Parte A.\n- Use as previsões para **direcionar a busca** (imagens de satélite, Street View, grade KML da Bellingcat), nunca como resposta.\n- Combine com o notebook 05: o Qwen3.5 explica as pistas em texto; o GeoCLIP aponta coordenadas."),
+    ("md", RODAPE),
+])
+
+# ---------------------------------------------------------------- 09 coordenação
+NB09 = ("09_comportamento_coordenado.ipynb", False, [
+    ("md", cabecalho("09_comportamento_coordenado.ipynb", "09 · Comportamento coordenado sem atribuição automática",
+        "Detecta contas que agem juntas: **mesmo link** em segundos, **texto quase igual** e **repost em rajada**. É o método do *coordination-network-toolkit* (QUT) reescrito em Python puro, com um princípio do *Phantomatics*: o sistema aponta **coordenação suspeita**, nunca **autoria**. O caso de demonstração inclui uma armadilha: veículos de imprensa que compartilham o mesmo comunicado oficial em sequência.",
+        False, "1 minuto")),
+    ("code", SETUP_REPO),
+    ("md", "## 1. Dados\nMesmo formato de CSV do *coordination-network-toolkit*: `message_id, user_id, username, repost_id, reply_id, message, timestamp, urls`. Para usar dados seus, exporte nesse formato e troque o caminho."),
+    ("code", """import json
+CSV = "/content/OSINTIA/dados/demo/campanha_coordenada.csv"
+msgs = coordenacao.ler_csv(CSV)
+print(len(msgs), "mensagens de", len({m["user_id"] for m in msgs}), "contas")
+print(msgs[0])"""),
+    ("md", "## 2. Sinais\n- `co_link`: mesma URL dentro da janela (60 s)\n- `co_dominio`: mesmo domínio dentro da janela (peso menor)\n- `co_repost`: repost da mesma mensagem dentro da janela\n- `co_texto`: textos com Jaccard ≥ 0,7 em trigramas, dentro de 1 hora"),
+    ("code", """JANELA_S, LIMIAR_TEXTO, MINIMO = 60, 0.7, 3.0
+s = coordenacao.sinais(msgs, janela=JANELA_S, limiar_texto=LIMIAR_TEXTO)
+arestas = coordenacao.grafo(s, minimo=MINIMO)
+grupos = coordenacao.grupos(arestas)
+print(len(s), "pares com algum sinal;", len(arestas), "arestas acima do mínimo;", len(grupos), "grupos")"""),
+    ("md", "## 3. Evidência por grupo"),
+    ("code", """resumos = [coordenacao.resumo_grupo(g, arestas, msgs) for g in grupos]
+for i, r in enumerate(resumos, 1):
+    print(f"Grupo {i}: {r['tamanho']} contas, densidade {r['densidade']}")
+    print("   sinais:", r["sinais"])
+    print("   domínios:", r["dominios"])
+    print("   contas:", r["contas"][:6], "..." if r["tamanho"] > 6 else "")
+print()
+print(coordenacao.AVISO)"""),
+    ("md", "## 4. Conferindo com a verdade do caso sintético\nNo mundo real não há gabarito. Aqui ele existe para mostrar o que o método acerta e onde ele engana."),
+    ("code", """with open("/content/OSINTIA/dados/demo/campanha_coordenada_verdade.json", encoding="utf-8") as f:
+    verdade = json.load(f)
+print(coordenacao.avaliar(grupos, verdade))
+for i, g in enumerate(grupos, 1):
+    rotulos = {verdade.get(u) or "legítimo" for u in g}
+    print(f"Grupo {i}: {sorted(rotulos)}")"""),
+    ("md", "Um dos grupos é a **imprensa**: coordenação real, mas legítima. É por isso que a saída diz *coordenação suspeita* e deixa a atribuição para o analista. Agora veja como o resultado muda com o limiar:"),
+    ("code", """for minimo in (2, 3, 5, 8, 12):
+    g = coordenacao.grupos(coordenacao.grafo(s, minimo=minimo))
+    print(f"mínimo {minimo:>2}:", coordenacao.avaliar(g, verdade), "| grupos:", [len(x) for x in g])"""),
+    ("md", "## 5. Exportar para Gephi e registrar"),
+    ("code", """import os
+os.makedirs("/content/saidas", exist_ok=True)
+coordenacao.exportar_graphml(arestas, "/content/saidas/coordenacao.graphml")
+with open("/content/saidas/coordenacao.json", "w", encoding="utf-8") as f:
+    json.dump({"parametros": {"janela_s": JANELA_S, "limiar_texto": LIMIAR_TEXTO, "minimo": MINIMO},
+               "grupos": resumos, "aviso": coordenacao.AVISO}, f, ensure_ascii=False, indent=1)
+custodia.registrar("/content/saidas/manifesto.jsonl", "coleta_mensagens", CSV)
+custodia.registrar("/content/saidas/manifesto.jsonl", "deteccao_coordenacao", "/content/saidas/coordenacao.json")
+print("GraphML e JSON em /content/saidas/ | custódia:", custodia.verificar("/content/saidas/manifesto.jsonl") or "íntegra")"""),
+    ("md", "## (Opcional) Comparar com o coordination-network-toolkit\nA ferramenta original da QUT aceita o mesmo CSV. Útil para validar o método em dados maiores."),
+    ("code", """COMPARAR_TOOLKIT = False
+if COMPARAR_TOOLKIT:
+    !pip install -q coordination-network-toolkit
+    !compute_networks /content/saidas/cnt.db preprocess --format csv {CSV}
+    !compute_networks /content/saidas/cnt.db compute co_link --time_window 60 --output_file /content/saidas/cnt_colink.graphml --output_format graphml
+    print("Compare /content/saidas/cnt_colink.graphml com /content/saidas/coordenacao.graphml no Gephi")"""),
+    ("md", "### Próximo passo com IA\nPasse os textos de cada grupo pelo notebook 04 (embeddings) para achar variações que escapam do Jaccard, e pelo 01 com o esquema `ameaca_postagem` para triar o conteúdo."),
+    ("md", RODAPE),
+])
+
+NOTEBOOKS = [NB00, NB01, NB02, NB03, NB04, NB05, NB06, NB07, NB08, NB09]
 
 
 def celula(tipo, fonte):

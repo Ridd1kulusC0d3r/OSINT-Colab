@@ -2,7 +2,7 @@
 
 1. Todo .ipynb é JSON válido no formato nbformat 4.
 2. Toda célula de código compila (comandos ! e % viram 'pass' antes do ast.parse).
-3. O notebook 00 (só stdlib) é EXECUTADO de verdade, trocando /content pelo repositório.
+3. Os notebooks só-stdlib (00 e 09) são EXECUTADOS de verdade, trocando /content pelo repositório.
 
 Uso:  python ferramentas/validar_notebooks.py
 """
@@ -49,12 +49,15 @@ def validar_sintaxe(caminho):
     return nb, erros
 
 
-def executar_nb00(nb):
+EXECUTAVEIS = ("00_", "09_")
+
+
+def executar(nb, nome):
     saidas = tempfile.mkdtemp()
     escopo = {}
     for fonte in celulas_codigo(nb):
         fonte = fonte.replace("/content/OSINTIA", RAIZ).replace("/content/saidas", saidas)
-        exec(compile(limpar_magicas(fonte), "nb00", "exec"), escopo)
+        exec(compile(limpar_magicas(fonte), nome, "exec"), escopo)
     return escopo
 
 
@@ -68,10 +71,13 @@ def main():
         for e in erros:
             print("   ", e)
         falhas += bool(erros)
-        if nome.startswith("00_") and not erros:
+        if nome.startswith(EXECUTAVEIS) and not erros:
             sys.path.insert(0, RAIZ)
-            escopo = executar_nb00(nb)
-            print(f"[OK] {nome}: executado de ponta a ponta (teto do professor = {escopo['teto']:.3f}, T = {escopo['T']:.2f})")
+            escopo = executar(nb, nome)
+            if nome.startswith("00_"):
+                print(f"[OK] {nome}: executado de ponta a ponta (teto do professor = {escopo['teto']:.3f}, T = {escopo['T']:.2f})")
+            else:
+                print(f"[OK] {nome}: executado de ponta a ponta ({len(escopo['grupos'])} grupos, {escopo['coordenacao'].avaliar(escopo['grupos'], escopo['verdade'])})")
     print(f"\n{len(nomes)} notebooks, {falhas} com falha")
     return 1 if falhas else 0
 

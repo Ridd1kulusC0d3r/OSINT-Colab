@@ -5,13 +5,16 @@
     python -m osintia mascarar "texto com CPF 529.982.247-25"
     python -m osintia verificar saidas/manifesto.jsonl
     python -m osintia esquemas
+    python -m osintia variantes bancoaurora
+    python -m osintia coordenacao dados/demo/campanha_coordenada.csv --minimo 3
+    python -m osintia analytics pagina.html
 """
 
 import argparse
 import json
 import sys
 
-from . import auditoria, calibracao, custodia, dados, esquemas, extracao
+from . import auditoria, calibracao, coleta, coordenacao, custodia, dados, esquemas, extracao
 
 
 def cmd_auditar(a):
@@ -52,6 +55,28 @@ def cmd_esquemas(_):
         print(f"{nome}: {tipos}")
 
 
+def cmd_variantes(a):
+    for v in coleta.variantes(a.nome, max_itens=a.max):
+        print(v)
+
+
+def cmd_coordenacao(a):
+    msgs = coordenacao.ler_csv(a.csv)
+    arestas = coordenacao.grafo(coordenacao.sinais(msgs, janela=a.janela), minimo=a.minimo)
+    grupos = coordenacao.grupos(arestas)
+    print(f"{len(msgs)} mensagens | {len(arestas)} arestas | {len(grupos)} grupos\n")
+    for i, g in enumerate(grupos, 1):
+        r = coordenacao.resumo_grupo(g, arestas, msgs)
+        print(f"Grupo {i}: {r['tamanho']} contas, densidade {r['densidade']}, sinais {r['sinais']}")
+        print("   ", ", ".join(r["contas"][:8]) + (" ..." if r["tamanho"] > 8 else ""))
+    print("\n" + coordenacao.AVISO)
+
+
+def cmd_analytics(a):
+    with open(a.html, encoding="utf-8", errors="replace") as f:
+        print(json.dumps(coleta.ids_analytics(f.read()), indent=2))
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(prog="osintia", description="Núcleo OSINTIA: auditoria, extração e custódia")
     sub = p.add_subparsers(dest="comando", required=True)
@@ -75,6 +100,21 @@ def main(argv=None):
 
     s = sub.add_parser("esquemas", help="lista as perguntas OSINT prontas")
     s.set_defaults(func=cmd_esquemas)
+
+    s = sub.add_parser("variantes", help="variantes de imitação de um username ou marca")
+    s.add_argument("nome")
+    s.add_argument("--max", type=int, default=60)
+    s.set_defaults(func=cmd_variantes)
+
+    s = sub.add_parser("coordenacao", help="grupos de contas coordenadas a partir de um CSV")
+    s.add_argument("csv")
+    s.add_argument("--janela", type=int, default=60)
+    s.add_argument("--minimo", type=float, default=3.0)
+    s.set_defaults(func=cmd_coordenacao)
+
+    s = sub.add_parser("analytics", help="IDs de analytics (UA-, G-, GTM-, pixel) em um arquivo HTML")
+    s.add_argument("html")
+    s.set_defaults(func=cmd_analytics)
 
     a = p.parse_args(argv)
     return a.func(a) or 0

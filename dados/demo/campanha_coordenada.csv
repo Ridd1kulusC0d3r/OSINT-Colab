@@ -1,0 +1,302 @@
+message_id,user_id,username,repost_id,reply_id,message,timestamp,urls
+m3,c0_2,aurora_alerta0252,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790000329,https://bit.example/aur0ra
+m4,c0_3,aurora_alerta0337,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790000331,https://bit.example/aur0ra
+m2,c0_1,aurora_alerta0126,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790000338,https://bit.example/aur0ra
+m1,c0_0,aurora_alerta0063,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790000342,https://bit.example/aur0ra
+m8,c0_3,aurora_alerta0337,m1,,,1790000363,
+m5,c0_0,aurora_alerta0063,m1,,,1790000372,
+m7,c0_2,aurora_alerta0252,m1,,,1790000372,
+m9,c0_4,aurora_alerta0461,m1,,,1790000378,
+m6,c0_1,aurora_alerta0126,m1,,,1790000386,
+m190,org_13,pessoa13_325,,,O atendimento do Aurora resolveu meu problema,1790001829,https://jornal-a.example/economia/aurora
+m285,org_52,pessoa52_532,,,Vale a pena a conta do Aurora?,1790003428,
+m169,org_6,pessoa6_694,,,Minha fatura do Aurora veio errada,1790004554,
+m196,org_16,pessoa16_124,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790005297,
+m249,org_37,pessoa37_188,,,Vale a pena a conta do Aurora?,1790006532,https://jornal-a.example/economia/aurora
+m213,org_23,pessoa23_202,,,"Fui no caixa do Aurora hoje, fila enorme",1790007140,
+m10,c0_0,aurora_alerta0063,,,Banco Aurora liberou prêmio para correntistas resgate no link antes que expire hoje,1790007796,https://aurora-estorno.example/login
+m12,c0_4,aurora_alerta0461,,,Banco Aurora liberou prêmio para correntistas resgate no link antes que expire hoje,1790007814,https://aurora-estorno.example/login
+m11,c0_3,aurora_alerta0337,,,Banco Aurora liberou prêmio para correntistas resgate no link antes que expire hoje,1790007815,https://aurora-estorno.example/login
+m16,c0_4,aurora_alerta0461,m10,,,1790007824,
+m14,c0_2,aurora_alerta0252,m10,,,1790007867,
+m15,c0_3,aurora_alerta0337,m10,,,1790007877,
+m13,c0_1,aurora_alerta0126,m10,,,1790007884,
+m159,org_3,pessoa3_417,,,"Fui no caixa do Aurora hoje, fila enorme",1790008270,
+m178,org_9,pessoa9_852,,,Alguém mais com o app do Aurora fora do ar?,1790009035,
+m166,org_5,pessoa5_911,,,Vale a pena a conta do Aurora?,1790009060,https://portal-b.example/aurora-instabilidade
+m207,org_21,pessoa21_805,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790010369,
+m217,org_24,pessoa24_959,,,Alguém mais com o app do Aurora fora do ar?,1790010579,
+m241,org_34,pessoa34_419,,,Vale a pena a conta do Aurora?,1790011838,
+m179,org_10,pessoa10_621,,,"Fui no caixa do Aurora hoje, fila enorme",1790012982,
+m231,org_29,pessoa29_930,,,Alguém mais com o app do Aurora fora do ar?,1790012982,
+m20,c0_3,aurora_alerta0337,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790014484,https://bit.example/aur0ra
+m19,c0_2,aurora_alerta0252,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790014490,https://bit.example/aur0ra
+m17,c0_0,aurora_alerta0063,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790014495,https://bit.example/aur0ra
+m18,c0_1,aurora_alerta0126,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790014501,https://bit.example/aur0ra
+m21,c0_4,aurora_alerta0461,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790014514,https://bit.example/aur0ra
+m22,c0_0,aurora_alerta0063,m17,,,1790014573,
+m170,org_7,pessoa7_780,,,O atendimento do Aurora resolveu meu problema,1790016777,https://jornal-a.example/economia/aurora
+m141,imp_0,redacao_jornal_a,,,Banco Aurora divulga comunicado oficial sobre golpes (1),1790020001,https://aurora.example/comunicado
+m142,imp_1,redacao_portal_b,,,Banco Aurora divulga comunicado oficial sobre golpes (1),1790020001,https://aurora.example/comunicado
+m143,imp_2,redacao_radio_c,,,Banco Aurora divulga comunicado oficial sobre golpes (1),1790020017,https://aurora.example/comunicado
+m221,org_26,pessoa26_844,,,Alguém mais com o app do Aurora fora do ar?,1790020537,
+m24,c0_1,aurora_alerta0126,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790021685,https://bit.example/aur0ra
+m25,c0_2,aurora_alerta0252,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790021693,https://bit.example/aur0ra
+m26,c0_3,aurora_alerta0337,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790021694,https://bit.example/aur0ra
+m23,c0_0,aurora_alerta0063,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790021710,https://bit.example/aur0ra
+m27,c0_4,aurora_alerta0461,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790021720,https://bit.example/aur0ra
+m28,c0_2,aurora_alerta0252,m23,,,1790021733,
+m287,org_54,pessoa54_946,,,Minha fatura do Aurora veio errada,1790023617,
+m215,org_23,pessoa23_202,,,"Fui no caixa do Aurora hoje, fila enorme",1790023830,https://portal-b.example/aurora-instabilidade
+m153,org_0,pessoa0_899,,,"Fui no caixa do Aurora hoje, fila enorme",1790026239,https://portal-b.example/aurora-instabilidade
+m162,org_4,pessoa4_857,,,Vale a pena a conta do Aurora?,1790027140,
+m30,c0_1,aurora_alerta0126,,,Banco Aurora liberou prêmio para correntistas resgate no link antes que expire hoje,1790028862,https://bit.example/aur0ra
+m29,c0_0,aurora_alerta0063,,,Banco Aurora liberou prêmio para correntistas resgate no link antes que expire hoje,1790028876,https://bit.example/aur0ra
+m32,c0_4,aurora_alerta0461,m29,,,1790028901,
+m31,c0_0,aurora_alerta0063,m29,,,1790028951,
+m290,org_55,pessoa55_779,,,Alguém mais com o app do Aurora fora do ar?,1790032060,
+m225,org_27,pessoa27_451,,,"Fui no caixa do Aurora hoje, fila enorme",1790032973,
+m232,org_29,pessoa29_930,,,Alguém mais com o app do Aurora fora do ar?,1790033035,https://portal-b.example/aurora-instabilidade
+m263,org_42,pessoa42_621,,,Aurora subiu a tarifa de novo,1790034271,
+m220,org_26,pessoa26_844,,,Aurora subiu a tarifa de novo,1790035808,
+m36,c0_4,aurora_alerta0461,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790036254,https://bit.example/aur0ra
+m35,c0_3,aurora_alerta0337,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790036275,https://bit.example/aur0ra
+m34,c0_2,aurora_alerta0252,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790036279,https://bit.example/aur0ra
+m33,c0_0,aurora_alerta0063,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790036293,https://bit.example/aur0ra
+m37,c0_1,aurora_alerta0126,m33,,,1790036310,
+m203,org_19,pessoa19_896,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790036693,https://portal-b.example/aurora-instabilidade
+m187,org_12,pessoa12_498,,,Vale a pena a conta do Aurora?,1790037308,
+m204,org_19,pessoa19_896,,,Minha fatura do Aurora veio errada,1790037503,
+m282,org_51,pessoa51_743,,,Alguém mais com o app do Aurora fora do ar?,1790037854,
+m164,org_5,pessoa5_911,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790039158,
+m183,org_11,pessoa11_882,,,"Fui no caixa do Aurora hoje, fila enorme",1790039505,
+m299,org_59,pessoa59_963,,,Aurora subiu a tarifa de novo,1790040038,
+m176,org_9,pessoa9_852,,,Aurora subiu a tarifa de novo,1790040844,
+m173,org_7,pessoa7_780,,,O atendimento do Aurora resolveu meu problema,1790042775,
+m294,org_56,pessoa56_684,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790045269,
+m158,org_3,pessoa3_417,,,O atendimento do Aurora resolveu meu problema,1790045901,https://portal-b.example/aurora-instabilidade
+m185,org_11,pessoa11_882,,,O atendimento do Aurora resolveu meu problema,1790047532,
+m281,org_51,pessoa51_743,,,"Fui no caixa do Aurora hoje, fila enorme",1790048053,
+m172,org_7,pessoa7_780,,,Alguém mais com o app do Aurora fora do ar?,1790049124,https://portal-b.example/aurora-instabilidade
+m145,imp_1,redacao_portal_b,,,Banco Aurora divulga comunicado oficial sobre golpes (2),1790050020,https://aurora.example/comunicado
+m144,imp_0,redacao_jornal_a,,,Banco Aurora divulga comunicado oficial sobre golpes (2),1790050035,https://aurora.example/comunicado
+m146,imp_2,redacao_radio_c,,,Banco Aurora divulga comunicado oficial sobre golpes (2),1790050044,https://aurora.example/comunicado
+m43,c1_6,aurora_alerta1688,,,Atenção clientes Banco Aurora seu estorno foi liberado confirme os dados no link hoje,1790050298,https://aurora-premios.example/resgate
+m38,c1_0,aurora_alerta1013,,,Atenção clientes Banco Aurora seu estorno foi liberado confirme os dados no link hoje,1790050306,https://aurora-premios.example/resgate
+m40,c1_2,aurora_alerta1275,,,Atenção clientes Banco Aurora seu estorno foi liberado confirme os dados no link hoje,1790050324,https://aurora-premios.example/resgate
+m42,c1_4,aurora_alerta1447,,,Atenção clientes Banco Aurora seu estorno foi liberado confirme os dados no link hoje,1790050326,https://aurora-premios.example/resgate
+m39,c1_1,aurora_alerta1183,,,Atenção clientes Banco Aurora seu estorno foi liberado confirme os dados no link hoje,1790050327,https://aurora-premios.example/resgate
+m41,c1_3,aurora_alerta1377,,,Atenção clientes Banco Aurora seu estorno foi liberado confirme os dados no link hoje,1790050330,https://aurora-premios.example/resgate
+m46,c1_4,aurora_alerta1447,m38,,,1790050371,
+m45,c1_3,aurora_alerta1377,m38,,,1790050376,
+m44,c1_0,aurora_alerta1013,m38,,,1790050382,
+m258,org_40,pessoa40_419,,,Alguém mais com o app do Aurora fora do ar?,1790053946,
+m165,org_5,pessoa5_911,,,Minha fatura do Aurora veio errada,1790054568,https://jornal-a.example/economia/aurora
+m199,org_17,pessoa17_699,,,"Fui no caixa do Aurora hoje, fila enorme",1790055016,
+m240,org_34,pessoa34_419,,,O atendimento do Aurora resolveu meu problema,1790055421,
+m237,org_32,pessoa32_652,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790056946,
+m49,c1_2,aurora_alerta1275,,,Banco Aurora liberou prêmio para correntistas resgate no link antes que expire hoje,1790057461,https://aurora-premios.example/resgate
+m50,c1_3,aurora_alerta1377,,,Banco Aurora liberou prêmio para correntistas resgate no link antes que expire hoje,1790057478,https://aurora-premios.example/resgate
+m51,c1_5,aurora_alerta1521,,,Banco Aurora liberou prêmio para correntistas resgate no link antes que expire hoje,1790057478,https://aurora-premios.example/resgate
+m52,c1_6,aurora_alerta1688,,,Banco Aurora liberou prêmio para correntistas resgate no link antes que expire hoje,1790057486,https://aurora-premios.example/resgate
+m47,c1_0,aurora_alerta1013,,,Banco Aurora liberou prêmio para correntistas resgate no link antes que expire hoje,1790057488,https://aurora-premios.example/resgate
+m48,c1_1,aurora_alerta1183,,,Banco Aurora liberou prêmio para correntistas resgate no link antes que expire hoje,1790057488,https://aurora-premios.example/resgate
+m56,c1_5,aurora_alerta1521,m47,,,1790057518,
+m53,c1_2,aurora_alerta1275,m47,,,1790057524,
+m55,c1_4,aurora_alerta1447,m47,,,1790057546,
+m57,c1_6,aurora_alerta1688,m47,,,1790057549,
+m54,c1_3,aurora_alerta1377,m47,,,1790057553,
+m219,org_25,pessoa25_226,,,"Fui no caixa do Aurora hoje, fila enorme",1790058048,
+m296,org_56,pessoa56_684,,,Alguém mais com o app do Aurora fora do ar?,1790059036,
+m195,org_16,pessoa16_124,,,O atendimento do Aurora resolveu meu problema,1790060562,
+m245,org_35,pessoa35_794,,,Vale a pena a conta do Aurora?,1790064421,
+m63,c1_6,aurora_alerta1688,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790064993,https://aurora-premios.example/resgate
+m60,c1_2,aurora_alerta1275,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790064998,https://aurora-premios.example/resgate
+m59,c1_1,aurora_alerta1183,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790065007,https://aurora-premios.example/resgate
+m61,c1_4,aurora_alerta1447,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790065011,https://aurora-premios.example/resgate
+m62,c1_5,aurora_alerta1521,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790065022,https://aurora-premios.example/resgate
+m58,c1_0,aurora_alerta1013,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790065029,https://aurora-premios.example/resgate
+m65,c1_2,aurora_alerta1275,m58,,,1790065069,
+m64,c1_0,aurora_alerta1013,m58,,,1790065076,
+m244,org_35,pessoa35_794,,,Alguém mais com o app do Aurora fora do ar?,1790066093,https://jornal-a.example/economia/aurora
+m188,org_12,pessoa12_498,,,Minha fatura do Aurora veio errada,1790066666,
+m286,org_53,pessoa53_917,,,Aurora subiu a tarifa de novo,1790066856,https://jornal-a.example/economia/aurora
+m276,org_47,pessoa47_146,,,"Fui no caixa do Aurora hoje, fila enorme",1790068938,https://jornal-a.example/economia/aurora
+m218,org_25,pessoa25_226,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790069882,
+m292,org_55,pessoa55_779,,,Alguém mais com o app do Aurora fora do ar?,1790070007,https://jornal-a.example/economia/aurora
+m70,c1_4,aurora_alerta1447,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790071889,https://bit.example/aur0ra
+m69,c1_3,aurora_alerta1377,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790071898,https://bit.example/aur0ra
+m72,c1_6,aurora_alerta1688,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790071920,https://bit.example/aur0ra
+m66,c1_0,aurora_alerta1013,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790071926,https://bit.example/aur0ra
+m67,c1_1,aurora_alerta1183,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790071927,https://bit.example/aur0ra
+m71,c1_5,aurora_alerta1521,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790071929,https://bit.example/aur0ra
+m68,c1_2,aurora_alerta1275,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790071930,https://bit.example/aur0ra
+m77,c1_4,aurora_alerta1447,m66,,,1790071939,
+m76,c1_3,aurora_alerta1377,m66,,,1790071951,
+m74,c1_1,aurora_alerta1183,m66,,,1790071962,
+m78,c1_5,aurora_alerta1521,m66,,,1790071962,
+m79,c1_6,aurora_alerta1688,m66,,,1790071965,
+m75,c1_2,aurora_alerta1275,m66,,,1790071968,
+m73,c1_0,aurora_alerta1013,m66,,,1790071972,
+m236,org_32,pessoa32_652,,,O atendimento do Aurora resolveu meu problema,1790072364,
+m256,org_39,pessoa39_587,,,"Fui no caixa do Aurora hoje, fila enorme",1790072753,https://portal-b.example/aurora-instabilidade
+m233,org_30,pessoa30_813,,,Vale a pena a conta do Aurora?,1790074567,
+m83,c1_3,aurora_alerta1377,,,Atenção clientes Banco Aurora seu estorno foi liberado confirme os dados no link hoje,1790078838,https://aurora-premios.example/resgate
+m80,c1_0,aurora_alerta1013,,,Atenção clientes Banco Aurora seu estorno foi liberado confirme os dados no link hoje,1790078843,https://aurora-premios.example/resgate
+m84,c1_4,aurora_alerta1447,,,Atenção clientes Banco Aurora seu estorno foi liberado confirme os dados no link hoje,1790078850,https://aurora-premios.example/resgate
+m85,c1_5,aurora_alerta1521,,,Atenção clientes Banco Aurora seu estorno foi liberado confirme os dados no link hoje,1790078850,https://aurora-premios.example/resgate
+m81,c1_1,aurora_alerta1183,,,Atenção clientes Banco Aurora seu estorno foi liberado confirme os dados no link hoje,1790078867,https://aurora-premios.example/resgate
+m82,c1_2,aurora_alerta1275,,,Atenção clientes Banco Aurora seu estorno foi liberado confirme os dados no link hoje,1790078868,https://aurora-premios.example/resgate
+m86,c1_2,aurora_alerta1275,m80,,,1790078900,
+m87,c1_3,aurora_alerta1377,m80,,,1790078902,
+m88,c1_4,aurora_alerta1447,m80,,,1790078913,
+m157,org_3,pessoa3_417,,,Alguém mais com o app do Aurora fora do ar?,1790078981,
+m270,org_45,pessoa45_181,,,Vale a pena a conta do Aurora?,1790079849,
+m266,org_44,pessoa44_328,,,"Fui no caixa do Aurora hoje, fila enorme",1790079961,
+m148,imp_1,redacao_portal_b,,,Banco Aurora divulga comunicado oficial sobre golpes (3),1790080011,https://aurora.example/comunicado
+m149,imp_2,redacao_radio_c,,,Banco Aurora divulga comunicado oficial sobre golpes (3),1790080014,https://aurora.example/comunicado
+m147,imp_0,redacao_jornal_a,,,Banco Aurora divulga comunicado oficial sobre golpes (3),1790080017,https://aurora.example/comunicado
+m291,org_55,pessoa55_779,,,Minha fatura do Aurora veio errada,1790081677,
+m264,org_43,pessoa43_790,,,"Fui no caixa do Aurora hoje, fila enorme",1790082317,https://portal-b.example/aurora-instabilidade
+m226,org_28,pessoa28_349,,,Minha fatura do Aurora veio errada,1790082618,https://jornal-a.example/economia/aurora
+m272,org_46,pessoa46_407,,,Alguém mais com o app do Aurora fora do ar?,1790084091,
+m212,org_23,pessoa23_202,,,Alguém mais com o app do Aurora fora do ar?,1790084657,
+m94,c1_5,aurora_alerta1521,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790086437,https://aurora-premios.example/resgate
+m91,c1_2,aurora_alerta1275,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790086454,https://aurora-premios.example/resgate
+m92,c1_3,aurora_alerta1377,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790086454,https://aurora-premios.example/resgate
+m93,c1_4,aurora_alerta1447,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790086458,https://aurora-premios.example/resgate
+m89,c1_0,aurora_alerta1013,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790086470,https://aurora-premios.example/resgate
+m90,c1_1,aurora_alerta1183,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790086471,https://aurora-premios.example/resgate
+m96,c1_3,aurora_alerta1377,m89,,,1790086489,
+m95,c1_2,aurora_alerta1275,m89,,,1790086505,
+m242,org_34,pessoa34_419,,,Alguém mais com o app do Aurora fora do ar?,1790086699,
+m243,org_35,pessoa35_794,,,Vale a pena a conta do Aurora?,1790090889,
+m202,org_18,pessoa18_998,,,Aurora subiu a tarifa de novo,1790092232,
+m205,org_19,pessoa19_896,,,Aurora subiu a tarifa de novo,1790092362,
+m300,org_59,pessoa59_963,,,Vale a pena a conta do Aurora?,1790092414,https://jornal-a.example/economia/aurora
+m206,org_20,pessoa20_641,,,Alguém mais com o app do Aurora fora do ar?,1790093888,
+m260,org_41,pessoa41_458,,,Alguém mais com o app do Aurora fora do ar?,1790094465,
+m251,org_37,pessoa37_188,,,Aurora subiu a tarifa de novo,1790095115,https://jornal-a.example/economia/aurora
+m247,org_36,pessoa36_735,,,O atendimento do Aurora resolveu meu problema,1790097742,
+m238,org_33,pessoa33_358,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790097901,https://jornal-a.example/economia/aurora
+m184,org_11,pessoa11_882,,,O atendimento do Aurora resolveu meu problema,1790098009,
+m175,org_8,pessoa8_794,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790099252,
+m101,c2_5,aurora_alerta2572,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790100128,https://aurora-estorno.example/login
+m99,c2_2,aurora_alerta2272,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790100129,https://aurora-estorno.example/login
+m100,c2_3,aurora_alerta2387,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790100136,https://aurora-estorno.example/login
+m97,c2_0,aurora_alerta2016,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790100137,https://aurora-estorno.example/login
+m98,c2_1,aurora_alerta2133,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790100150,https://aurora-estorno.example/login
+m102,c2_0,aurora_alerta2016,m97,,,1790100173,
+m103,c2_2,aurora_alerta2272,m97,,,1790100192,
+m104,c2_3,aurora_alerta2387,m97,,,1790100203,
+m154,org_1,pessoa1_833,,,Vale a pena a conta do Aurora?,1790101924,https://portal-b.example/aurora-instabilidade
+m168,org_6,pessoa6_694,,,Vale a pena a conta do Aurora?,1790105660,
+m106,c2_1,aurora_alerta2133,,,Banco Aurora liberou prêmio para correntistas resgate no link antes que expire hoje,1790107715,https://bit.example/aur0ra
+m107,c2_2,aurora_alerta2272,,,Banco Aurora liberou prêmio para correntistas resgate no link antes que expire hoje,1790107715,https://bit.example/aur0ra
+m110,c2_5,aurora_alerta2572,,,Banco Aurora liberou prêmio para correntistas resgate no link antes que expire hoje,1790107732,https://bit.example/aur0ra
+m109,c2_4,aurora_alerta2429,,,Banco Aurora liberou prêmio para correntistas resgate no link antes que expire hoje,1790107733,https://bit.example/aur0ra
+m108,c2_3,aurora_alerta2387,,,Banco Aurora liberou prêmio para correntistas resgate no link antes que expire hoje,1790107741,https://bit.example/aur0ra
+m105,c2_0,aurora_alerta2016,,,Banco Aurora liberou prêmio para correntistas resgate no link antes que expire hoje,1790107745,https://bit.example/aur0ra
+m111,c2_5,aurora_alerta2572,m105,,,1790107771,
+m278,org_49,pessoa49_335,,,Aurora subiu a tarifa de novo,1790109321,
+m161,org_4,pessoa4_857,,,Aurora subiu a tarifa de novo,1790109470,
+m208,org_21,pessoa21_805,,,Alguém mais com o app do Aurora fora do ar?,1790110250,
+m288,org_54,pessoa54_946,,,O atendimento do Aurora resolveu meu problema,1790112200,
+m248,org_36,pessoa36_735,,,O atendimento do Aurora resolveu meu problema,1790112603,
+m280,org_50,pessoa50_566,,,O atendimento do Aurora resolveu meu problema,1790113005,
+m171,org_7,pessoa7_780,,,O atendimento do Aurora resolveu meu problema,1790114289,
+m229,org_29,pessoa29_930,,,O atendimento do Aurora resolveu meu problema,1790114626,
+m113,c2_3,aurora_alerta2387,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790114697,https://bit.example/aur0ra
+m114,c2_4,aurora_alerta2429,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790114703,https://bit.example/aur0ra
+m112,c2_1,aurora_alerta2133,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790114707,https://bit.example/aur0ra
+m115,c2_5,aurora_alerta2572,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790114717,https://bit.example/aur0ra
+m116,c2_3,aurora_alerta2387,m112,,,1790114746,
+m117,c2_4,aurora_alerta2429,m112,,,1790114759,
+m118,c2_5,aurora_alerta2572,m112,,,1790114785,
+m150,org_0,pessoa0_899,,,Alguém mais com o app do Aurora fora do ar?,1790115178,
+m222,org_26,pessoa26_844,,,Minha fatura do Aurora veio errada,1790117479,
+m284,org_51,pessoa51_743,,,Alguém mais com o app do Aurora fora do ar?,1790120698,
+m121,c2_3,aurora_alerta2387,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790122119,https://aurora-premios.example/resgate
+m119,c2_0,aurora_alerta2016,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790122150,https://aurora-premios.example/resgate
+m120,c2_1,aurora_alerta2133,,,"Clientes do Banco Aurora: seu estorno foi liberado, confirme seus dados no link agora",1790122152,https://aurora-premios.example/resgate
+m122,c2_1,aurora_alerta2133,m119,,,1790122183,
+m123,c2_2,aurora_alerta2272,m119,,,1790122197,
+m124,c2_4,aurora_alerta2429,m119,,,1790122211,
+m211,org_22,pessoa22_701,,,O atendimento do Aurora resolveu meu problema,1790122645,https://jornal-a.example/economia/aurora
+m200,org_18,pessoa18_998,,,Minha fatura do Aurora veio errada,1790123605,https://portal-b.example/aurora-instabilidade
+m273,org_46,pessoa46_407,,,O atendimento do Aurora resolveu meu problema,1790126136,https://portal-b.example/aurora-instabilidade
+m214,org_23,pessoa23_202,,,Aurora subiu a tarifa de novo,1790126625,
+m253,org_38,pessoa38_207,,,O atendimento do Aurora resolveu meu problema,1790127444,
+m197,org_16,pessoa16_124,,,O atendimento do Aurora resolveu meu problema,1790127719,
+m293,org_56,pessoa56_684,,,Aurora subiu a tarifa de novo,1790127816,
+m155,org_2,pessoa2_549,,,Vale a pena a conta do Aurora?,1790128525,
+m126,c2_1,aurora_alerta2133,,,Atenção clientes Banco Aurora seu estorno foi liberado confirme os dados no link hoje,1790129223,https://aurora-estorno.example/login
+m127,c2_3,aurora_alerta2387,,,Atenção clientes Banco Aurora seu estorno foi liberado confirme os dados no link hoje,1790129243,https://aurora-estorno.example/login
+m128,c2_4,aurora_alerta2429,,,Atenção clientes Banco Aurora seu estorno foi liberado confirme os dados no link hoje,1790129249,https://aurora-estorno.example/login
+m125,c2_0,aurora_alerta2016,,,Atenção clientes Banco Aurora seu estorno foi liberado confirme os dados no link hoje,1790129254,https://aurora-estorno.example/login
+m129,c2_5,aurora_alerta2572,,,Atenção clientes Banco Aurora seu estorno foi liberado confirme os dados no link hoje,1790129263,https://aurora-estorno.example/login
+m131,c2_5,aurora_alerta2572,m125,,,1790129293,
+m130,c2_4,aurora_alerta2429,m125,,,1790129312,
+m160,org_4,pessoa4_857,,,Aurora subiu a tarifa de novo,1790130838,
+m210,org_22,pessoa22_701,,,Aurora subiu a tarifa de novo,1790131761,
+m250,org_37,pessoa37_188,,,Aurora subiu a tarifa de novo,1790132487,
+m267,org_45,pessoa45_181,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790135053,https://portal-b.example/aurora-instabilidade
+m134,c2_2,aurora_alerta2272,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790136320,https://aurora-premios.example/resgate
+m132,c2_0,aurora_alerta2016,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790136322,https://aurora-premios.example/resgate
+m135,c2_3,aurora_alerta2387,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790136323,https://aurora-premios.example/resgate
+m133,c2_1,aurora_alerta2133,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790136324,https://aurora-premios.example/resgate
+m137,c2_5,aurora_alerta2572,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790136333,https://aurora-premios.example/resgate
+m136,c2_4,aurora_alerta2429,,,"URGENTE Banco Aurora liberou prêmio para correntistas, resgate no link antes que expire",1790136350,https://aurora-premios.example/resgate
+m139,c2_1,aurora_alerta2133,m132,,,1790136364,
+m140,c2_2,aurora_alerta2272,m132,,,1790136399,
+m138,c2_0,aurora_alerta2016,m132,,,1790136413,
+m223,org_26,pessoa26_844,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790140547,https://portal-b.example/aurora-instabilidade
+m228,org_28,pessoa28_349,,,Vale a pena a conta do Aurora?,1790140957,https://portal-b.example/aurora-instabilidade
+m301,org_59,pessoa59_963,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790142083,
+m201,org_18,pessoa18_998,,,Aurora subiu a tarifa de novo,1790142494,
+m209,org_21,pessoa21_805,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790143948,
+m295,org_56,pessoa56_684,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790144497,
+m255,org_39,pessoa39_587,,,Minha fatura do Aurora veio errada,1790145349,https://jornal-a.example/economia/aurora
+m298,org_58,pessoa58_995,,,Aurora subiu a tarifa de novo,1790148473,https://jornal-a.example/economia/aurora
+m275,org_47,pessoa47_146,,,O atendimento do Aurora resolveu meu problema,1790151076,
+m230,org_29,pessoa29_930,,,Vale a pena a conta do Aurora?,1790151452,
+m216,org_24,pessoa24_959,,,Minha fatura do Aurora veio errada,1790153634,
+m194,org_15,pessoa15_249,,,"Fui no caixa do Aurora hoje, fila enorme",1790154321,
+m152,org_0,pessoa0_899,,,Vale a pena a conta do Aurora?,1790155197,
+m265,org_43,pessoa43_790,,,Alguém mais com o app do Aurora fora do ar?,1790155997,
+m261,org_41,pessoa41_458,,,Alguém mais com o app do Aurora fora do ar?,1790157355,
+m235,org_32,pessoa32_652,,,Alguém mais com o app do Aurora fora do ar?,1790158342,
+m277,org_48,pessoa48_266,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790158821,
+m268,org_45,pessoa45_181,,,Aurora subiu a tarifa de novo,1790161154,
+m297,org_57,pessoa57_600,,,Aurora subiu a tarifa de novo,1790162418,https://portal-b.example/aurora-instabilidade
+m271,org_46,pessoa46_407,,,Minha fatura do Aurora veio errada,1790162893,https://portal-b.example/aurora-instabilidade
+m254,org_39,pessoa39_587,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790162999,
+m181,org_10,pessoa10_621,,,O atendimento do Aurora resolveu meu problema,1790163862,
+m252,org_38,pessoa38_207,,,O atendimento do Aurora resolveu meu problema,1790163910,
+m279,org_49,pessoa49_335,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790163947,
+m224,org_27,pessoa27_451,,,Vale a pena a conta do Aurora?,1790165073,
+m192,org_14,pessoa14_500,,,"Fui no caixa do Aurora hoje, fila enorme",1790165709,
+m239,org_33,pessoa33_358,,,Alguém mais com o app do Aurora fora do ar?,1790168869,
+m186,org_11,pessoa11_882,,,Alguém mais com o app do Aurora fora do ar?,1790169500,https://jornal-a.example/economia/aurora
+m257,org_40,pessoa40_419,,,Alguém mais com o app do Aurora fora do ar?,1790170974,
+m262,org_41,pessoa41_458,,,Aurora subiu a tarifa de novo,1790174753,https://portal-b.example/aurora-instabilidade
+m289,org_55,pessoa55_779,,,Vale a pena a conta do Aurora?,1790175136,
+m274,org_46,pessoa46_407,,,O atendimento do Aurora resolveu meu problema,1790177629,
+m269,org_45,pessoa45_181,,,O atendimento do Aurora resolveu meu problema,1790178658,https://jornal-a.example/economia/aurora
+m151,org_0,pessoa0_899,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790180044,
+m189,org_12,pessoa12_498,,,Alguém mais com o app do Aurora fora do ar?,1790180152,https://portal-b.example/aurora-instabilidade
+m182,org_10,pessoa10_621,,,Aurora subiu a tarifa de novo,1790183687,
+m167,org_6,pessoa6_694,,,Aurora subiu a tarifa de novo,1790183929,
+m259,org_40,pessoa40_419,,,Minha fatura do Aurora veio errada,1790184014,
+m227,org_28,pessoa28_349,,,Vale a pena a conta do Aurora?,1790184307,
+m193,org_14,pessoa14_500,,,"Fui no caixa do Aurora hoje, fila enorme",1790185938,
+m156,org_3,pessoa3_417,,,"Recebi uma mensagem estranha dizendo ser do Aurora, cuidado",1790187279,https://portal-b.example/aurora-instabilidade
+m234,org_31,pessoa31_975,,,Minha fatura do Aurora veio errada,1790187289,
+m191,org_13,pessoa13_325,,,Vale a pena a conta do Aurora?,1790188043,
+m174,org_8,pessoa8_794,,,Vale a pena a conta do Aurora?,1790191384,https://jornal-a.example/economia/aurora
+m246,org_35,pessoa35_794,,,Minha fatura do Aurora veio errada,1790192888,https://portal-b.example/aurora-instabilidade
+m177,org_9,pessoa9_852,,,O atendimento do Aurora resolveu meu problema,1790194197,
+m163,org_4,pessoa4_857,,,Aurora subiu a tarifa de novo,1790196436,https://jornal-a.example/economia/aurora
+m198,org_16,pessoa16_124,,,Alguém mais com o app do Aurora fora do ar?,1790197271,https://portal-b.example/aurora-instabilidade
+m283,org_51,pessoa51_743,,,O atendimento do Aurora resolveu meu problema,1790199507,
+m180,org_10,pessoa10_621,,,Alguém mais com o app do Aurora fora do ar?,1790199954,

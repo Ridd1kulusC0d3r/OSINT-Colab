@@ -48,7 +48,8 @@ ol li{margin:.35rem 0}
 .card h3{margin-top:0}
 .tag{display:inline-block;font-size:.75rem;padding:1px 8px;border-radius:99px;border:1px solid var(--line);color:var(--mute);margin-right:4px}
 footer{text-align:center;color:var(--mute);font-size:.85rem;padding:24px 16px 48px}
-@media (max-width:600px){header h1{font-size:1.8rem}section{padding:16px}}
+@media (max-width:600px){header h1{font-size:1.8rem}section{padding:16px}table{display:block;overflow-x:auto}}
+code{overflow-wrap:anywhere}
 </style>
 </head>
 <body>
@@ -71,21 +72,22 @@ footer{text-align:center;color:var(--mute);font-size:.85rem;padding:24px 16px 48
     <text x="105" y="110" text-anchor="middle" font-size="14">Perfis e postagens</text>
     <text x="105" y="145" text-anchor="middle" font-size="14">Pastes e vazamentos</text>
     <text x="105" y="180" text-anchor="middle" font-size="14">Imagens</text>
-    <text x="105" y="215" text-anchor="middle" font-size="14">Relatos e notícias</text>
+    <text x="105" y="215" text-anchor="middle" font-size="14">crt.sh · Wayback</text>
+    <text x="105" y="245" text-anchor="middle" font-size="12" fill="var(--mute)">coleta: notebook 07</text>
     <rect class="boxa" x="250" y="40" width="200" height="220" rx="10"/>
     <text x="350" y="70" text-anchor="middle" font-weight="700">Modelos (Colab)</text>
     <text x="350" y="108" text-anchor="middle" font-size="14">Qwen3.5 · decisão</text>
     <text x="350" y="138" text-anchor="middle" font-size="14">GLiNER · entidades</text>
     <text x="350" y="168" text-anchor="middle" font-size="14">e5 · vínculos</text>
     <text x="350" y="198" text-anchor="middle" font-size="14">DeepSeek-R1 · ACH</text>
-    <text x="350" y="228" text-anchor="middle" font-size="14">Qwen3.5 · visão</text>
+    <text x="350" y="228" text-anchor="middle" font-size="14">Qwen3.5 + GeoCLIP · GEOINT</text>
     <rect class="boxg" x="510" y="40" width="200" height="220" rx="10"/>
     <text x="610" y="70" text-anchor="middle" font-weight="700">Núcleo OSINTIA</text>
     <text x="610" y="108" text-anchor="middle" font-size="14">Calibração</text>
     <text x="610" y="138" text-anchor="middle" font-size="14">Teto do professor</text>
     <text x="610" y="168" text-anchor="middle" font-size="14">Humano no circuito</text>
     <text x="610" y="198" text-anchor="middle" font-size="14">Validação BR</text>
-    <text x="610" y="228" text-anchor="middle" font-size="14">Cadeia de custódia</text>
+    <text x="610" y="228" text-anchor="middle" font-size="14">Coordenação · custódia</text>
     <rect class="box" x="770" y="100" width="110" height="100" rx="10"/>
     <text x="825" y="140" text-anchor="middle" font-weight="700">Relatório</text>
     <text x="825" y="165" text-anchor="middle" font-size="13">código B2</text>
@@ -198,6 +200,25 @@ footer{text-align:center;color:var(--mute);font-size:.85rem;padding:24px 16px 48
     <div class="card"><h3>04 · Vínculos</h3><span class="tag">CPU</span><span class="tag">3 min</span><p>Ajuste <code>LIMIAR</code> para agrupar mais ou menos contas. Confira cada grupo antes de afirmar que é a mesma pessoa.</p></div>
     <div class="card"><h3>05 · GEOINT</h3><span class="tag">T4</span><span class="tag">10 min</span><p>Envie uma foto. O modelo devolve pistas, não a resposta. Confirme cada país candidato em mapas.</p></div>
     <div class="card"><h3>06 · Sem Unsloth</h3><span class="tag">T4/CPU</span><span class="tag">5–10 min</span><p>Linha de base sem treino. Se concordar mais com o humano que o 01, o problema está no gabarito.</p></div>
+    <div class="card"><h3>07 · Coleta</h3><span class="tag">CPU</span><span class="tag">5–20 min</span><p>Preencha <code>MARCA</code>, <code>TERMO_CRTSH</code> e <code>SITE_OFICIAL</code>. Sai um arquivo <code>para_triagem.jsonl</code> pronto para o notebook 01.</p></div>
+    <div class="card"><h3>08 · GeoCLIP</h3><span class="tag">T4/CPU</span><span class="tag">10 min</span><p>Envie fotos originais suas com GPS para medir o modelo em quilômetros. O KML abre no Google Earth.</p></div>
+    <div class="card"><h3>09 · Coordenação</h3><span class="tag">CPU</span><span class="tag">1 min</span><p>Troque o CSV pelos seus dados (mesmo formato do coordination-network-toolkit). Ajuste <code>MINIMO</code> e veja a armadilha da imprensa.</p></div>
+  </div>
+  <h3>Fluxo de uma investigação</h3>
+  <svg viewBox="0 0 900 120" role="img" aria-label="Fluxo: coleta 07, triagem 01, entidades 02, vínculos 04 e 09, imagens 05 e 08, hipóteses 03, relatório">
+    <g font-size="13">
+      <rect class="boxa" x="5" y="30" width="110" height="60" rx="8"/><text x="60" y="56" text-anchor="middle" font-weight="700">07</text><text x="60" y="76" text-anchor="middle">coleta</text>
+      <rect class="boxa" x="135" y="30" width="110" height="60" rx="8"/><text x="190" y="56" text-anchor="middle" font-weight="700">01</text><text x="190" y="76" text-anchor="middle">triagem</text>
+      <rect class="boxa" x="265" y="30" width="110" height="60" rx="8"/><text x="320" y="56" text-anchor="middle" font-weight="700">02</text><text x="320" y="76" text-anchor="middle">entidades</text>
+      <rect class="boxa" x="395" y="30" width="110" height="60" rx="8"/><text x="450" y="56" text-anchor="middle" font-weight="700">04 · 09</text><text x="450" y="76" text-anchor="middle">vínculos</text>
+      <rect class="boxa" x="525" y="30" width="110" height="60" rx="8"/><text x="580" y="56" text-anchor="middle" font-weight="700">05 · 08</text><text x="580" y="76" text-anchor="middle">imagens</text>
+      <rect class="boxa" x="655" y="30" width="110" height="60" rx="8"/><text x="710" y="56" text-anchor="middle" font-weight="700">03</text><text x="710" y="76" text-anchor="middle">hipóteses</text>
+      <rect class="boxg" x="785" y="30" width="110" height="60" rx="8"/><text x="840" y="56" text-anchor="middle" font-weight="700">00</text><text x="840" y="76" text-anchor="middle">relatório</text>
+    </g>
+    <path class="arrow" d="M115 60 H131"/><path class="arrow" d="M245 60 H261"/><path class="arrow" d="M375 60 H391"/><path class="arrow" d="M505 60 H521"/><path class="arrow" d="M635 60 H651"/><path class="arrow" d="M765 60 H781"/>
+  </svg>
+  <p>Mais notebooks da comunidade (Bellingcat, GeoCLIP, StreetCLIP, coordination-network-toolkit): <code>docs/COLABS-RELACIONADOS.md</code>.</p>
+  <div>
   </div>
 </section>
 
@@ -224,6 +245,9 @@ footer{text-align:center;color:var(--mute);font-size:.85rem;padding:24px 16px 48
     <tr><td>Erro na célula de instalação</td><td>Versão nova da Unsloth</td><td>Compare com o notebook oficial mais recente; abra uma <em>issue</em></td></tr>
     <tr><td><code>ModuleNotFoundError: osintia</code></td><td>Repositório não baixado</td><td>Rode a segunda célula do notebook</td></tr>
     <tr><td>Treino muito lento</td><td>T4 treina Qwen3.5 em float32</td><td>Normal; use <code>FONTE = "demo"</code></td></tr>
+    <tr><td>crt.sh ou Wayback sem resposta (07)</td><td>Serviço público lento</td><td>O notebook segue sem eles; rode a célula de novo mais tarde</td></tr>
+    <tr><td>Maigret demora muito (07)</td><td>Muitas variantes</td><td>Reduza <code>MAX_VARIANTES_MAIGRET</code></td></tr>
+    <tr><td>"envie pelo menos 5" no 08</td><td>Poucas fotos com GPS</td><td>Use fotos originais do celular, não baixadas de redes sociais</td></tr>
     <tr><td>"Sem JSON válido" no 03 ou 05</td><td>O modelo não fechou o JSON</td><td>Rode de novo ou aumente <code>max_new_tokens</code></td></tr>
     <tr><td>O lançador fecha sozinho</td><td>Python não está no PATH</td><td>Reinstale marcando "Add python.exe to PATH"</td></tr>
   </table>
@@ -246,6 +270,10 @@ footer{text-align:center;color:var(--mute);font-size:.85rem;padding:24px 16px 48
     <tr><td>ACH</td><td>Análise de Hipóteses Concorrentes (Heuer): vence a hipótese com menos evidência contra.</td></tr>
     <tr><td>Escala do Almirantado</td><td>Avaliação de fonte (A–F) e de informação (1–6), como B2.</td></tr>
     <tr><td>Cadeia de custódia</td><td>Registro que prova que evidências e resultados não foram alterados.</td></tr>
+    <tr><td>Certificate Transparency</td><td>Registro público de todo certificado HTTPS emitido; consultado pelo crt.sh.</td></tr>
+    <tr><td>ID de analytics</td><td>Código de rastreamento (UA-, G-, GTM-, pixel) que tende a se repetir em sites do mesmo dono.</td></tr>
+    <tr><td>Comportamento coordenado</td><td>Contas que publicam o mesmo link ou texto quase ao mesmo tempo. Indica organização, não necessariamente má-fé.</td></tr>
+    <tr><td>Haversine</td><td>Fórmula da distância entre dois pontos na superfície da Terra, usada para medir o erro em km.</td></tr>
     <tr><td>Zero-shot</td><td>Usar o modelo numa tarefa sem treino específico para ela.</td></tr>
   </table>
 </section>
@@ -262,14 +290,20 @@ footer{text-align:center;color:var(--mute);font-size:.85rem;padding:24px 16px 48
     <tr><td><code>osintia.dados</code></td><td>JSONL, gold suave a partir de amostras, holdout reprodutível</td></tr>
     <tr><td><code>osintia.custodia</code></td><td>Manifesto SHA-256 encadeado e verificação</td></tr>
     <tr><td><code>osintia.extracao</code></td><td>CPF, CNPJ, telefone com DDD, e-mail, IP, URL, handle; mascaramento LGPD</td></tr>
+    <tr><td><code>osintia.coleta</code></td><td>crt.sh, Wayback CDX, IDs de analytics, variantes de username, leitura de NDJSON</td></tr>
+    <tr><td><code>osintia.coordenacao</code></td><td>Co-link, co-domínio, co-repost, co-texto (Jaccard), grupos, GraphML; atribuição sempre nula</td></tr>
+    <tr><td><code>osintia.geo</code></td><td>Haversine, GPS do EXIF, acurácia por distância, calibração em km, dispersão do top-k, KML</td></tr>
   </table>
-  <h3>Resultado dos testes (10/10/2026, ambiente de nuvem, Python 3)</h3>
+  <h3>Resultado dos testes (11/10/2026, ambiente de nuvem, Python 3)</h3>
   <table>
     <tr><th>Verificação</th><th>Resultado</th></tr>
-    <tr><td>Testes unitários do núcleo</td><td>24 de 24 aprovados</td></tr>
+    <tr><td>Testes unitários do núcleo</td><td>43 de 43 aprovados</td></tr>
     <tr><td>Notebook 00 executado de ponta a ponta</td><td>Aprovado (teto 0,915; T = 1,60; cadeia íntegra)</td></tr>
-    <tr><td>Notebooks 01 a 06: JSON e sintaxe de todas as células</td><td>Aprovados</td></tr>
-    <tr><td>Notebooks 01 a 06 executados em GPU</td><td>Não executados neste ambiente (sem acesso a GPU e ao Hugging Face)</td></tr>
+    <tr><td>Notebook 09 executado de ponta a ponta</td><td>Aprovado (4 grupos; cobertura 1,0; precisão 0,86)</td></tr>
+    <tr><td>Notebook 08, Parte A (auditoria sem GPU)</td><td>Aprovado (ECE 0,21 a 25 km)</td></tr>
+    <tr><td>Notebooks 01 a 08: JSON e sintaxe de todas as células</td><td>Aprovados</td></tr>
+    <tr><td>Notebooks 01 a 06 e 08 (Parte B) executados em GPU</td><td>Não executados neste ambiente (sem acesso a GPU e ao Hugging Face)</td></tr>
+    <tr><td>Notebook 07 contra serviços reais</td><td>Não executado (rede do ambiente bloqueia crt.sh e Wayback); parsers testados offline</td></tr>
     <tr><td>Lançador Linux</td><td>Aprovado</td></tr>
   </table>
   <div class="callout warn">Os notebooks com GPU seguem o código oficial da Unsloth lido em outubro de 2026. Bibliotecas de IA mudam rápido; o relatório completo está em <code>docs/RELATORIO-DE-TESTES.md</code>.</div>
