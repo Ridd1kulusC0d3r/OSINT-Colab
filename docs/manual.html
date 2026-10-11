@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manual OSINTIA</title>
+<style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#16202c;--mute:#5a6675;--line:#dde2e8;--acc:#1f5fbf;--acc2:#0e8a6a;--warn:#b5651d;--mark:#d9333f;--code:#eef1f5}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f141a;--card:#171e26;--ink:#e6ebf1;--mute:#9aa6b3;--line:#2a3440;--acc:#6aa5ff;--acc2:#3fc59f;--warn:#e39a52;--mark:#ff6b75;--code:#1f2832}}
+:root[data-theme="dark"]{--bg:#0f141a;--card:#171e26;--ink:#e6ebf1;--mute:#9aa6b3;--line:#2a3440;--acc:#6aa5ff;--acc2:#3fc59f;--warn:#e39a52;--mark:#ff6b75;--code:#1f2832}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:48px 16px 28px;text-align:center;border-bottom:1px solid var(--line)}
+header h1{margin:0;font-size:2.4rem;letter-spacing:.04em}
+header p{margin:.4rem auto 0;max-width:640px;color:var(--mute)}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap;padding:8px 16px}
+nav a{color:var(--mute);text-decoration:none;margin-right:16px;font-size:.92rem}
+nav a:hover{color:var(--acc)}
+main{max-width:980px;margin:0 auto;padding:16px}
+section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px;margin:24px 0}
+h2{margin-top:0;font-size:1.5rem}
+h3{font-size:1.1rem;margin-bottom:.3rem}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--code);border-radius:6px}
+code{padding:1px 5px;font-size:.9em}
+pre{padding:12px;overflow-x:auto;font-size:.85rem;line-height:1.45}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{color:var(--mute);font-weight:600}
+.callout{border-left:4px solid var(--acc);background:var(--code);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+.callout.warn{border-color:var(--warn)}
+svg{width:100%;height:auto;display:block}
+svg text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:var(--ink)}
+.box{fill:var(--card);stroke:var(--line);stroke-width:1.5}
+.boxa{fill:var(--code);stroke:var(--acc);stroke-width:1.8}
+.boxg{fill:var(--code);stroke:var(--acc2);stroke-width:1.8}
+.arrow{stroke:var(--mute);stroke-width:1.6;fill:none;marker-end:url(#seta)}
+.mk circle{fill:var(--mark)} .mk text{fill:#fff;font-weight:700;font-size:13px}
+.legend{display:grid;grid-template-columns:28px 1fr;gap:6px 10px;margin-top:12px;font-size:.93rem}
+.legend b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--mark);color:#fff;font-size:.8rem}
+.tabs input{position:absolute;opacity:0}
+.tabs label{display:inline-block;padding:8px 14px;border:1px solid var(--line);border-bottom:none;border-radius:8px 8px 0 0;cursor:pointer;color:var(--mute);margin-right:4px;font-size:.92rem}
+.tabs .panel{display:none;border:1px solid var(--line);border-radius:0 8px 8px 8px;padding:16px}
+#t1:checked~label[for=t1],#t2:checked~label[for=t2],#t3:checked~label[for=t3],#t4:checked~label[for=t4]{background:var(--code);color:var(--ink);font-weight:600}
+#t1:checked~.p1,#t2:checked~.p2,#t3:checked~.p3,#t4:checked~.p4{display:block}
+ol li{margin:.35rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-radius:10px;padding:14px}
+.card h3{margin-top:0}
+.tag{display:inline-block;font-size:.75rem;padding:1px 8px;border-radius:99px;border:1px solid var(--line);color:var(--mute);margin-right:4px}
+footer{text-align:center;color:var(--mute);font-size:.85rem;padding:24px 16px 48px}
+@media (max-width:600px){header h1{font-size:1.8rem}section{padding:16px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>OSINTIA</h1>
+  <p>Manual ilustrado · modelos de IA para OSINT que você consegue rodar, medir e auditar, mesmo sem experiência em aprendizado de máquina.</p>
+</header>
+<nav>
+  <a href="#como">Como funciona</a><a href="#jornada">Jornada</a><a href="#instalar">Instalação</a><a href="#telas">Telas</a><a href="#uso">Uso guiado</a><a href="#relatorios">Relatórios</a><a href="#problemas">Problemas</a><a href="#glossario">Glossário</a><a href="#tecnico">Técnico</a>
+</nav>
+<main>
+
+<section id="como">
+  <h2>Como funciona</h2>
+  <p>Modelos de IA leem textos e imagens de fontes abertas e devolvem <strong>decisões com probabilidade</strong>. O núcleo OSINTIA, em Python puro, mede se essa probabilidade merece confiança e manda para você tudo o que estiver em dúvida.</p>
+  <svg viewBox="0 0 900 300" role="img" aria-label="Diagrama: fontes abertas alimentam modelos no Colab, que passam pelo núcleo OSINTIA antes do relatório">
+    <defs><marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" style="color:var(--mute)"/></marker></defs>
+    <rect class="box" x="20" y="40" width="170" height="220" rx="10"/>
+    <text x="105" y="70" text-anchor="middle" font-weight="700">Fontes abertas</text>
+    <text x="105" y="110" text-anchor="middle" font-size="14">Perfis e postagens</text>
+    <text x="105" y="145" text-anchor="middle" font-size="14">Pastes e vazamentos</text>
+    <text x="105" y="180" text-anchor="middle" font-size="14">Imagens</text>
+    <text x="105" y="215" text-anchor="middle" font-size="14">Relatos e notícias</text>
+    <rect class="boxa" x="250" y="40" width="200" height="220" rx="10"/>
+    <text x="350" y="70" text-anchor="middle" font-weight="700">Modelos (Colab)</text>
+    <text x="350" y="108" text-anchor="middle" font-size="14">Qwen3.5 · decisão</text>
+    <text x="350" y="138" text-anchor="middle" font-size="14">GLiNER · entidades</text>
+    <text x="350" y="168" text-anchor="middle" font-size="14">e5 · vínculos</text>
+    <text x="350" y="198" text-anchor="middle" font-size="14">DeepSeek-R1 · ACH</text>
+    <text x="350" y="228" text-anchor="middle" font-size="14">Qwen3.5 · visão</text>
+    <rect class="boxg" x="510" y="40" width="200" height="220" rx="10"/>
+    <text x="610" y="70" text-anchor="middle" font-weight="700">Núcleo OSINTIA</text>
+    <text x="610" y="108" text-anchor="middle" font-size="14">Calibração</text>
+    <text x="610" y="138" text-anchor="middle" font-size="14">Teto do professor</text>
+    <text x="610" y="168" text-anchor="middle" font-size="14">Humano no circuito</text>
+    <text x="610" y="198" text-anchor="middle" font-size="14">Validação BR</text>
+    <text x="610" y="228" text-anchor="middle" font-size="14">Cadeia de custódia</text>
+    <rect class="box" x="770" y="100" width="110" height="100" rx="10"/>
+    <text x="825" y="140" text-anchor="middle" font-weight="700">Relatório</text>
+    <text x="825" y="165" text-anchor="middle" font-size="13">código B2</text>
+    <path class="arrow" d="M190 150 H245"/><path class="arrow" d="M450 150 H505"/><path class="arrow" d="M710 150 H765"/>
+  </svg>
+  <div class="callout"><strong>A ideia central:</strong> confiança calibrada não é verdade. É concordância com quem rotulou o gabarito. Por isso o OSINTIA audita o gabarito antes de você confiar no modelo.</div>
+</section>
+
+<section id="jornada">
+  <h2>Sua jornada</h2>
+  <svg viewBox="0 0 900 170" role="img" aria-label="Cinco passos: abrir no Colab, executar tudo, ler a auditoria, ajustar o limiar, gerar o relatório">
+    <g font-size="14">
+      <rect class="boxa" x="10" y="40" width="160" height="80" rx="10"/><text x="90" y="75" text-anchor="middle" font-weight="700">1. Abrir</text><text x="90" y="98" text-anchor="middle">botão Colab</text>
+      <rect class="boxa" x="190" y="40" width="160" height="80" rx="10"/><text x="270" y="75" text-anchor="middle" font-weight="700">2. Executar</text><text x="270" y="98" text-anchor="middle">Executar tudo</text>
+      <rect class="boxg" x="370" y="40" width="160" height="80" rx="10"/><text x="450" y="75" text-anchor="middle" font-weight="700">3. Auditar</text><text x="450" y="98" text-anchor="middle">teto e lacuna</text>
+      <rect class="boxg" x="550" y="40" width="160" height="80" rx="10"/><text x="630" y="75" text-anchor="middle" font-weight="700">4. Limiar</text><text x="630" y="98" text-anchor="middle">cobertura × acerto</text>
+      <rect class="box" x="730" y="40" width="160" height="80" rx="10"/><text x="810" y="75" text-anchor="middle" font-weight="700">5. Relatório</text><text x="810" y="98" text-anchor="middle">custódia + LGPD</text>
+    </g>
+    <path class="arrow" d="M170 80 H186"/><path class="arrow" d="M350 80 H366"/><path class="arrow" d="M530 80 H546"/><path class="arrow" d="M710 80 H726"/>
+  </svg>
+</section>
+
+<section id="instalar">
+  <h2>Instalação passo a passo</h2>
+  <div class="tabs">
+    <input type="radio" name="so" id="t1" checked><label for="t1">Navegador (Colab)</label>
+    <input type="radio" name="so" id="t2"><label for="t2">Windows</label>
+    <input type="radio" name="so" id="t3"><label for="t3">macOS</label>
+    <input type="radio" name="so" id="t4"><label for="t4">Linux</label>
+    <div class="panel p1">
+      <p><strong>Não precisa instalar nada.</strong> Funciona em qualquer sistema com um navegador e uma conta Google.</p>
+      <ol>
+        <li>No README do repositório, clique no botão <em>Open in Colab</em> do notebook desejado.</li>
+        <li>Para os notebooks 01, 03, 05 e 06: menu <strong>Ambiente de execução → Alterar o tipo de ambiente de execução → T4 GPU → Salvar</strong>.</li>
+        <li>Menu <strong>Ambiente de execução → Executar tudo</strong>.</li>
+        <li>Se aparecer o aviso "Este notebook não foi criado pelo Google", clique em <strong>Executar mesmo assim</strong>.</li>
+      </ol>
+    </div>
+    <div class="panel p2">
+      <p>Para rodar só o núcleo (auditoria, extração e custódia) no seu PC.</p>
+      <ol>
+        <li>Instale o Python em <code>python.org/downloads</code>. Na primeira tela do instalador, marque <strong>Add python.exe to PATH</strong>.</li>
+        <li>No GitHub, clique em <strong>Code → Download ZIP</strong> e descompacte.</li>
+        <li>Dê dois cliques em <code>rodar-no-windows.bat</code>.</li>
+        <li>Se o Windows SmartScreen avisar, clique em <strong>Mais informações → Executar assim mesmo</strong>.</li>
+      </ol>
+    </div>
+    <div class="panel p3">
+      <ol>
+        <li>Instale o Python em <code>python.org/downloads</code> (o do sistema pode ser antigo).</li>
+        <li>Baixe o ZIP do repositório e descompacte.</li>
+        <li>Na primeira vez, clique com o botão direito em <code>rodar-no-mac.command</code> → <strong>Abrir</strong> → <strong>Abrir</strong>. Nas próximas, dois cliques bastam.</li>
+      </ol>
+    </div>
+    <div class="panel p4">
+      <ol>
+        <li>Quase toda distribuição já tem Python 3. Confira com <code>python3 --version</code>.</li>
+        <li><code>git clone https://github.com/Ridd1kulusC0d3r/OSINTIA.git</code></li>
+        <li><code>cd OSINTIA &amp;&amp; bash rodar-no-linux.sh</code></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="telas">
+  <h2>Telas anotadas</h2>
+  <p>Ilustração da interface do Colab com os pontos que importam. A aparência real pode variar um pouco.</p>
+  <svg viewBox="0 0 900 420" role="img" aria-label="Ilustração do Google Colab com cinco marcadores numerados">
+    <rect class="box" x="10" y="10" width="880" height="400" rx="10"/>
+    <rect x="10" y="10" width="880" height="44" rx="10" fill="var(--code)"/>
+    <text x="30" y="38" font-size="14" font-weight="700">01_decisao_qwen35_osint.ipynb</text>
+    <text x="330" y="38" font-size="13" fill="var(--mute)">Arquivo   Editar   Ver   Inserir</text>
+    <rect x="590" y="22" width="150" height="22" rx="4" fill="var(--card)" stroke="var(--acc)"/><text x="665" y="38" text-anchor="middle" font-size="13">Ambiente de execução</text>
+    <rect x="770" y="20" width="100" height="26" rx="13" fill="var(--card)" stroke="var(--acc2)"/><text x="820" y="38" text-anchor="middle" font-size="12">T4 · RAM ▮▮▯</text>
+    <rect x="40" y="80" width="820" height="70" rx="6" fill="var(--card)" stroke="var(--line)"/>
+    <text x="60" y="110" font-size="18" font-weight="700">01 · Modelo de decisão OSINT</text>
+    <text x="60" y="134" font-size="13" fill="var(--mute)">Hardware: GPU T4 gratuita · Tempo estimado: 15 a 40 min</text>
+    <rect x="40" y="170" width="820" height="92" rx="6" fill="var(--code)" stroke="var(--line)"/>
+    <circle cx="66" cy="194" r="12" fill="none" stroke="var(--mute)"/><path d="M62 188 L72 194 L62 200 z" fill="var(--mute)"/>
+    <text x="92" y="198" font-family="ui-monospace,monospace" font-size="13">MODELO = "unsloth/Qwen3.5-4B"</text>
+    <text x="92" y="220" font-family="ui-monospace,monospace" font-size="13">model, tokenizer = FastDecisionModel.from_pretrained(...)</text>
+    <text x="92" y="242" font-family="ui-monospace,monospace" font-size="13" fill="var(--mute)"># troque MODELO para comparar outros modelos</text>
+    <rect x="40" y="280" width="820" height="110" rx="6" fill="var(--card)" stroke="var(--line)"/>
+    <text x="60" y="306" font-family="ui-monospace,monospace" font-size="13">vs gold:   {'acuracia': 0.95, 'ece': 0.03}</text>
+    <text x="60" y="328" font-family="ui-monospace,monospace" font-size="13">vs humano: {'acuracia': 0.81, 'ece': 0.12}</text>
+    <text x="60" y="350" font-family="ui-monospace,monospace" font-size="13">teto do professor: 0.915</text>
+    <text x="60" y="374" font-family="ui-monospace,monospace" font-size="13" fill="var(--warn)">⚠ O modelo concorda com o gold mais do que o próprio professor</text>
+    <g class="mk"><circle cx="590" cy="22" r="13"/><text x="590" y="27" text-anchor="middle">1</text></g>
+    <g class="mk"><circle cx="870" cy="20" r="13"/><text x="870" y="25" text-anchor="middle">2</text></g>
+    <g class="mk"><circle cx="40" cy="80" r="13"/><text x="40" y="85" text-anchor="middle">3</text></g>
+    <g class="mk"><circle cx="66" cy="170" r="13"/><text x="66" y="175" text-anchor="middle">4</text></g>
+    <g class="mk"><circle cx="40" cy="374" r="13"/><text x="40" y="379" text-anchor="middle">5</text></g>
+  </svg>
+  <div class="legend">
+    <b>1</b><span><strong>Ambiente de execução:</strong> escolha a GPU T4 e use <em>Executar tudo</em>.</span>
+    <b>2</b><span><strong>Indicador de recursos:</strong> confirme que aparece T4. Se a RAM encher, reinicie o ambiente.</span>
+    <b>3</b><span><strong>Cabeçalho:</strong> diz o hardware necessário e o tempo esperado.</span>
+    <b>4</b><span><strong>Botão de executar a célula:</strong> rode uma célula por vez se quiser acompanhar.</span>
+    <b>5</b><span><strong>Alerta de decoração:</strong> o modelo aprendeu os vícios do professor. Leia a lista de erros herdados logo abaixo.</span>
+  </div>
+</section>
+
+<section id="uso">
+  <h2>Uso guiado</h2>
+  <div class="grid">
+    <div class="card"><h3>00 · Núcleo</h3><span class="tag">CPU</span><span class="tag">2 min</span><p>Comece aqui. Mostra o teto do professor, calibração, roteamento e custódia com o caso fictício.</p></div>
+    <div class="card"><h3>01 · Decisão</h3><span class="tag">T4</span><span class="tag">15–40 min</span><p>Treina o Qwen3.5 para triar perfis. Mude <code>FONTE</code> para somar incidentes de segurança. Leia a seção 5 com atenção.</p></div>
+    <div class="card"><h3>02 · Entidades</h3><span class="tag">CPU</span><span class="tag">5 min</span><p>Troque o dicionário <code>textos</code> pelos seus textos. A coluna <code>regra_confirma</code> diz se CPF, CNPJ e telefone passam no dígito verificador.</p></div>
+    <div class="card"><h3>03 · ACH</h3><span class="tag">T4</span><span class="tag">10–20 min</span><p>Edite <code>HIPOTESES</code> e <code>EVIDENCIAS</code>. Células que mudam entre rodadas são onde o modelo não sabe.</p></div>
+    <div class="card"><h3>04 · Vínculos</h3><span class="tag">CPU</span><span class="tag">3 min</span><p>Ajuste <code>LIMIAR</code> para agrupar mais ou menos contas. Confira cada grupo antes de afirmar que é a mesma pessoa.</p></div>
+    <div class="card"><h3>05 · GEOINT</h3><span class="tag">T4</span><span class="tag">10 min</span><p>Envie uma foto. O modelo devolve pistas, não a resposta. Confirme cada país candidato em mapas.</p></div>
+    <div class="card"><h3>06 · Sem Unsloth</h3><span class="tag">T4/CPU</span><span class="tag">5–10 min</span><p>Linha de base sem treino. Se concordar mais com o humano que o 01, o problema está no gabarito.</p></div>
+  </div>
+</section>
+
+<section id="relatorios">
+  <h2>Gerando relatórios</h2>
+  <p>Todo notebook grava arquivos em <code>/content/saidas/</code> e um <code>manifesto.jsonl</code>. Baixe a pasta pelo painel de arquivos do Colab (ícone de pasta, à esquerda).</p>
+  <svg viewBox="0 0 900 150" role="img" aria-label="Cada evento do manifesto guarda o hash do anterior, formando uma cadeia">
+    <g font-size="13">
+      <rect class="boxg" x="20" y="30" width="250" height="90" rx="8"/><text x="40" y="58" font-weight="700">#1 carga_dataset</text><text x="40" y="82">sha256 do arquivo</text><text x="40" y="104" fill="var(--mute)">anterior: 0000…</text>
+      <rect class="boxg" x="325" y="30" width="250" height="90" rx="8"/><text x="345" y="58" font-weight="700">#2 auditoria_modelo</text><text x="345" y="82">sha256 do arquivo</text><text x="345" y="104" fill="var(--mute)">anterior: hash #1</text>
+      <rect class="boxg" x="630" y="30" width="250" height="90" rx="8"/><text x="650" y="58" font-weight="700">#3 relatorio</text><text x="650" y="82">sha256 do arquivo</text><text x="650" y="104" fill="var(--mute)">anterior: hash #2</text>
+    </g>
+    <path class="arrow" d="M270 75 H320"/><path class="arrow" d="M575 75 H625"/>
+  </svg>
+  <p>Para conferir a integridade depois: <code>python -m osintia verificar saidas/manifesto.jsonl</code>. Para remover dados pessoais de um texto: <code>python -m osintia mascarar "..."</code>.</p>
+  <p>No relatório, use o código do Almirantado (ex.: <strong>B2</strong>), cite a fonte original e registre o modelo, a versão e o limiar usados.</p>
+</section>
+
+<section id="problemas">
+  <h2>Solução de problemas</h2>
+  <table>
+    <tr><th>Sintoma</th><th>Causa provável</th><th>O que fazer</th></tr>
+    <tr><td><code>CUDA out of memory</code></td><td>Sem GPU ou modelo grande</td><td>Escolha T4, reinicie o ambiente; no 03 use o modelo 1.5B</td></tr>
+    <tr><td>Erro na célula de instalação</td><td>Versão nova da Unsloth</td><td>Compare com o notebook oficial mais recente; abra uma <em>issue</em></td></tr>
+    <tr><td><code>ModuleNotFoundError: osintia</code></td><td>Repositório não baixado</td><td>Rode a segunda célula do notebook</td></tr>
+    <tr><td>Treino muito lento</td><td>T4 treina Qwen3.5 em float32</td><td>Normal; use <code>FONTE = "demo"</code></td></tr>
+    <tr><td>"Sem JSON válido" no 03 ou 05</td><td>O modelo não fechou o JSON</td><td>Rode de novo ou aumente <code>max_new_tokens</code></td></tr>
+    <tr><td>O lançador fecha sozinho</td><td>Python não está no PATH</td><td>Reinstale marcando "Add python.exe to PATH"</td></tr>
+  </table>
+</section>
+
+<section id="glossario">
+  <h2>Glossário</h2>
+  <table>
+    <tr><th>Termo</th><th>Significado</th></tr>
+    <tr><td>Modelo de decisão</td><td>Modelo que escolhe entre opções definidas antes e devolve a probabilidade de cada uma, em vez de escrever texto.</td></tr>
+    <tr><td>choice / noul / score</td><td>Tipos de pergunta: escolha de uma opção, sim/não, e nível ordinal.</td></tr>
+    <tr><td>LoRA</td><td>Técnica que ajusta só pequenas matrizes do modelo, barata o bastante para o Colab gratuito.</td></tr>
+    <tr><td>Calibração</td><td>Ajuste para que 90% de confiança signifique acertar cerca de 90% das vezes.</td></tr>
+    <tr><td>ECE</td><td>Erro de calibração esperado: distância média entre confiança e acerto. Menor é melhor.</td></tr>
+    <tr><td>Temperature scaling</td><td>Divide os logits por um número T para suavizar ou afiar as probabilidades sem mudar a decisão.</td></tr>
+    <tr><td>Gold / gabarito</td><td>As respostas consideradas certas no treino. Podem ter sido geradas por outro modelo.</td></tr>
+    <tr><td>Professor</td><td>O modelo que gerou o gold.</td></tr>
+    <tr><td>Teto do professor</td><td>Quanto uma nova resposta do professor concorda com o gold. Passar disso indica decoração.</td></tr>
+    <tr><td>Lacuna humana</td><td>Diferença entre concordar com o gold e concordar com um analista.</td></tr>
+    <tr><td>ACH</td><td>Análise de Hipóteses Concorrentes (Heuer): vence a hipótese com menos evidência contra.</td></tr>
+    <tr><td>Escala do Almirantado</td><td>Avaliação de fonte (A–F) e de informação (1–6), como B2.</td></tr>
+    <tr><td>Cadeia de custódia</td><td>Registro que prova que evidências e resultados não foram alterados.</td></tr>
+    <tr><td>Zero-shot</td><td>Usar o modelo numa tarefa sem treino específico para ela.</td></tr>
+  </table>
+</section>
+
+<section id="tecnico">
+  <h2>Seção técnica</h2>
+  <h3>Componentes</h3>
+  <table>
+    <tr><th>Módulo</th><th>Função</th></tr>
+    <tr><td><code>osintia.calibracao</code></td><td>ECE, Brier, NLL, tabela de confiabilidade, temperature scaling por busca áurea</td></tr>
+    <tr><td><code>osintia.auditoria</code></td><td>Concordância, kappa de Cohen, matriz de confusão, teto do professor, erros herdados</td></tr>
+    <tr><td><code>osintia.roteamento</code></td><td>Limiar global e por opção, varredura cobertura × acurácia, código do Almirantado</td></tr>
+    <tr><td><code>osintia.esquemas</code></td><td>Cinco esquemas OSINT e validação dos limites da API</td></tr>
+    <tr><td><code>osintia.dados</code></td><td>JSONL, gold suave a partir de amostras, holdout reprodutível</td></tr>
+    <tr><td><code>osintia.custodia</code></td><td>Manifesto SHA-256 encadeado e verificação</td></tr>
+    <tr><td><code>osintia.extracao</code></td><td>CPF, CNPJ, telefone com DDD, e-mail, IP, URL, handle; mascaramento LGPD</td></tr>
+  </table>
+  <h3>Resultado dos testes (10/10/2026, ambiente de nuvem, Python 3)</h3>
+  <table>
+    <tr><th>Verificação</th><th>Resultado</th></tr>
+    <tr><td>Testes unitários do núcleo</td><td>24 de 24 aprovados</td></tr>
+    <tr><td>Notebook 00 executado de ponta a ponta</td><td>Aprovado (teto 0,915; T = 1,60; cadeia íntegra)</td></tr>
+    <tr><td>Notebooks 01 a 06: JSON e sintaxe de todas as células</td><td>Aprovados</td></tr>
+    <tr><td>Notebooks 01 a 06 executados em GPU</td><td>Não executados neste ambiente (sem acesso a GPU e ao Hugging Face)</td></tr>
+    <tr><td>Lançador Linux</td><td>Aprovado</td></tr>
+  </table>
+  <div class="callout warn">Os notebooks com GPU seguem o código oficial da Unsloth lido em outubro de 2026. Bibliotecas de IA mudam rápido; o relatório completo está em <code>docs/RELATORIO-DE-TESTES.md</code>.</div>
+</section>
+</main>
+<footer>OSINTIA · Deivison Lourenço · MIT · uso ético e conforme a LGPD</footer>
+</body>
+</html>

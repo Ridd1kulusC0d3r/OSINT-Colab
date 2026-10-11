@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "Se usar o OSINTIA, cite assim."
+title: "OSINTIA: modelos de IA para OSINT reconstruídos e auditáveis"
+authors:
+  - family-names: "Lourenço"
+    given-names: "Deivison"
+    alias: "Ridd1kulusC0d3r"
+version: "1.0.0"
+date-released: "2026-10-10"
+license: MIT
+repository-code: "https://github.com/Ridd1kulusC0d3r/OSINTIA"
+keywords: [OSINT, inteligência de fontes abertas, modelos de decisão, calibração, GLiNER, Qwen, DeepSeek, LGPD]
