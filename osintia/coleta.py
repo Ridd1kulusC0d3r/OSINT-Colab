@@ -20,7 +20,7 @@ import time
 import urllib.parse
 import urllib.request
 
-AGENTE = "OSINTIA/1.1 (+https://github.com/Ridd1kulusC0d3r/OSINTIA)"
+AGENTE = "OSINTIA/1.1 (+https://github.com/Ridd1kulusC0d3r/OSINT-Colab)"
 INTERVALO_S = 1.5
 _ultima = [0.0]
 

@@ -4,13 +4,13 @@ Você não precisa instalar nada para começar. Escolha um caminho.
 
 ## Caminho 1 · Só no navegador (recomendado)
 
-1. Abra o [notebook 00 no Colab](https://colab.research.google.com/github/Ridd1kulusC0d3r/OSINTIA/blob/main/notebooks/00_nucleo_sem_gpu.ipynb).
+1. Abra o [notebook 00 no Colab](https://colab.research.google.com/github/Ridd1kulusC0d3r/OSINT-Colab/blob/main/notebooks/00_nucleo_sem_gpu.ipynb).
 2. Menu **Ambiente de execução → Executar tudo**.
 3. Em 2 minutos você verá o teto do professor, a calibração e a cadeia de custódia funcionando.
 
 Depois, para os modelos de IA:
 
-4. Abra o [notebook 01](https://colab.research.google.com/github/Ridd1kulusC0d3r/OSINTIA/blob/main/notebooks/01_decisao_qwen35_osint.ipynb).
+4. Abra o [notebook 01](https://colab.research.google.com/github/Ridd1kulusC0d3r/OSINT-Colab/blob/main/notebooks/01_decisao_qwen35_osint.ipynb).
 5. Menu **Ambiente de execução → Alterar o tipo de ambiente de execução → T4 GPU → Salvar**.
 6. **Executar tudo** e espere a instalação (5 a 10 minutos) e o treino.
 

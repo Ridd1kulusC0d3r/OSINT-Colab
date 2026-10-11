@@ -11,7 +11,7 @@ Uso:  python ferramentas/gerar_notebooks.py
 import json
 import os
 
-REPO = "Ridd1kulusC0d3r/OSINTIA"
+REPO = "Ridd1kulusC0d3r/OSINT-Colab"
 PASTA = os.path.join(os.path.dirname(__file__), "..", "notebooks")
 
 
@@ -39,9 +39,9 @@ def cabecalho(nome, titulo, resumo, gpu, tempo):
 
 
 SETUP_REPO = """# Baixa o OSINTIA (núcleo em Python puro: calibração, auditoria, roteamento, custódia)
-!git clone -q https://github.com/Ridd1kulusC0d3r/OSINTIA.git /content/OSINTIA 2>/dev/null || git -C /content/OSINTIA pull -q
+!git clone -q https://github.com/Ridd1kulusC0d3r/OSINT-Colab.git /content/OSINT-Colab 2>/dev/null || git -C /content/OSINT-Colab pull -q
 import sys
-sys.path.insert(0, "/content/OSINTIA")
+sys.path.insert(0, "/content/OSINT-Colab")
 from osintia import auditoria, calibracao, coleta, coordenacao, custodia, dados, esquemas, extracao, geo, roteamento
 print("OSINTIA pronto")"""
 
@@ -88,7 +88,7 @@ erros, avisos = esquemas.validar(esquema)
 print("erros:", erros, "| avisos:", avisos)
 print("catálogo disponível:", list(esquemas.CATALOGO))"""),
     ("md", "## 2. O caso de demonstração\nCada linha tem `state` (o perfil em texto), `questions`, `gold` (média de 3 respostas de um **professor** simulado) e `rotulo_humano` (a verificação de um analista). O professor tem um vício proposital: **todo perfil com selo de verificado vira `legitimo`**."),
-    ("code", """linhas = dados.carregar_jsonl("/content/OSINTIA/dados/demo/triagem_perfis.jsonl")
+    ("code", """linhas = dados.carregar_jsonl("/content/OSINT-Colab/dados/demo/triagem_perfis.jsonl")
 print(len(linhas), "perfis")
 print(linhas[0]["state"])
 print(json.loads(linhas[0]["gold"])["perfil"])
@@ -147,7 +147,7 @@ os.makedirs("/content/saidas", exist_ok=True)
 dados.salvar_jsonl([{"id": l["id"], "decisao": g} for l, g in zip(linhas, gold)], "/content/saidas/decisoes.jsonl")
 man = "/content/saidas/manifesto.jsonl"
 if os.path.exists(man): os.remove(man)
-custodia.registrar(man, "carga_dataset", "/content/OSINTIA/dados/demo/triagem_perfis.jsonl")
+custodia.registrar(man, "carga_dataset", "/content/OSINT-Colab/dados/demo/triagem_perfis.jsonl")
 custodia.registrar(man, "decisoes", "/content/saidas/decisoes.jsonl", {"teto_professor": round(teto, 4)})
 print("problemas:", custodia.verificar(man) or "nenhum, cadeia íntegra")"""),
     ("md", RODAPE),
@@ -181,7 +181,7 @@ model = FastDecisionModel.get_peft_model(
     ("code", """import json
 FONTE = "demo"  # ou "demo+seguranca"
 
-linhas = dados.carregar_jsonl("/content/OSINTIA/dados/demo/triagem_perfis.jsonl")
+linhas = dados.carregar_jsonl("/content/OSINT-Colab/dados/demo/triagem_perfis.jsonl")
 treino_linhas, auditoria_linhas = dados.dividir_holdout(linhas, fracao=0.2, semente=3407)
 print(len(treino_linhas), "para treino/calibração |", len(auditoria_linhas), "para auditoria humana")
 
@@ -471,7 +471,7 @@ NB04 = ("04_embeddings_vinculos.ipynb", False, [
 MODELO = "intfloat/multilingual-e5-base"
 enc = SentenceTransformer(MODELO)
 
-linhas = dados.carregar_jsonl("/content/OSINTIA/dados/demo/triagem_perfis.jsonl")
+linhas = dados.carregar_jsonl("/content/OSINT-Colab/dados/demo/triagem_perfis.jsonl")
 def campo(state, nome):
     for l in state.splitlines():
         if l.startswith(nome):
@@ -626,7 +626,7 @@ def decidir(state, pergunta):
 
 print(decidir("Perfil analisado: @bancoaur0ra\\nBio: Mande seu CPF no direct para estorno.", esquemas.TRIAGEM_PERFIL["perfil"]))"""),
     ("md", "## 3. Calibrar e auditar\nMesma divisão do notebook 01: auditoria humana separada; calibração em outra parte."),
-    ("code", """linhas = dados.carregar_jsonl("/content/OSINTIA/dados/demo/triagem_perfis.jsonl")
+    ("code", """linhas = dados.carregar_jsonl("/content/OSINT-Colab/dados/demo/triagem_perfis.jsonl")
 resto, aud = dados.dividir_holdout(linhas, fracao=0.2, semente=3407)
 calib = resto[:80]
 pergunta = esquemas.TRIAGEM_PERFIL["perfil"]
@@ -763,7 +763,7 @@ NB08 = ("08_geoclip_geolocalizacao_auditada.ipynb", True, [
     ("code", "!pip install -q geoclip"),
     ("code", SETUP_REPO),
     ("md", "## Parte A · A auditoria, sem GPU\nPrevisões **simuladas** de um geolocalizador superconfiante sobre 240 fotos fictícias em capitais brasileiras. Ele diz 50% a 80% de certeza até em fotos de natureza e interiores."),
-    ("code", """sim = dados.carregar_jsonl("/content/OSINTIA/dados/demo/geo_previsoes.jsonl")
+    ("code", """sim = dados.carregar_jsonl("/content/OSINT-Colab/dados/demo/geo_previsoes.jsonl")
 prev = [tuple(x["topk"][0]) for x in sim]
 verd = [tuple(x["verdade"]) for x in sim]
 conf = [x["probs"][0] for x in sim]
@@ -856,7 +856,7 @@ NB09 = ("09_comportamento_coordenado.ipynb", False, [
     ("code", SETUP_REPO),
     ("md", "## 1. Dados\nMesmo formato de CSV do *coordination-network-toolkit*: `message_id, user_id, username, repost_id, reply_id, message, timestamp, urls`. Para usar dados seus, exporte nesse formato e troque o caminho."),
     ("code", """import json
-CSV = "/content/OSINTIA/dados/demo/campanha_coordenada.csv"
+CSV = "/content/OSINT-Colab/dados/demo/campanha_coordenada.csv"
 msgs = coordenacao.ler_csv(CSV)
 print(len(msgs), "mensagens de", len({m["user_id"] for m in msgs}), "contas")
 print(msgs[0])"""),
@@ -876,7 +876,7 @@ for i, r in enumerate(resumos, 1):
 print()
 print(coordenacao.AVISO)"""),
     ("md", "## 4. Conferindo com a verdade do caso sintético\nNo mundo real não há gabarito. Aqui ele existe para mostrar o que o método acerta e onde ele engana."),
-    ("code", """with open("/content/OSINTIA/dados/demo/campanha_coordenada_verdade.json", encoding="utf-8") as f:
+    ("code", """with open("/content/OSINT-Colab/dados/demo/campanha_coordenada_verdade.json", encoding="utf-8") as f:
     verdade = json.load(f)
 print(coordenacao.avaliar(grupos, verdade))
 for i, g in enumerate(grupos, 1):

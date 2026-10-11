@@ -56,7 +56,7 @@ def executar(nb, nome):
     saidas = tempfile.mkdtemp()
     escopo = {}
     for fonte in celulas_codigo(nb):
-        fonte = fonte.replace("/content/OSINTIA", RAIZ).replace("/content/saidas", saidas)
+        fonte = fonte.replace("/content/OSINT-Colab", RAIZ).replace("/content/saidas", saidas)
         exec(compile(limpar_magicas(fonte), nome, "exec"), escopo)
     return escopo
 
